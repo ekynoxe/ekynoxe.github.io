@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://ww.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>ruby - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+    
+
+
+<ul>
+    <li class="home"><a title="home"  href="/">HOME</a></li>
+    <!-- <li><a title="work"  href="/work">WORK</a></li> -->
+    <li><a title="news" class="selected" href="/news">NEWS</a></li>
+    <li><a title="contact me"  href="/#contact">CONTACT</a></li>
+</ul>
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+<div id="page">
+    <div class="content">
+<section>
+    <header>
+        <h1 class="category">ruby</h1>
+    </header>
+
+    
+        <article>
+    <header>
+        <time datetime="2012-01-06">January 06, 2012</time>
+        <h1><a href="/latest-website-propryo-com" title="Latest website: Propryo.com">Latest website: Propryo.com</a></h1>
+    </header>
+
+    
+        <p><a title="Propryo.com" href="http://propryo.com/" target="_blank">Propryo</a> is a slight twist of the French word &#8220;proprio&#8221;, which means &#8220;home owner&#8221;. My sister is trying to explore a few business ideas and we built together this little website where home owners advertise their properties for sale. Propryo is nothing close to a trading platform, it&#8217;s only there to advertise properties in a simple way.</p>
+
+
+
+
+<p>The latest addition to the properties for sale is the <a title="Villa à Calvi (2A)" href="http://propryo.com/villa-calvi" target="_blank">Villa in Calvi</a> which is a great addition as a featured property!</p>
+
+
+
+
+<p class="attachement"><a href="http://cdn.ekynoxe.com/content/2012-01-06-latest-website-propryo-com/propryo.png" title="Propryo" rel="lightbox[892]"><img src="http://cdn.ekynoxe.com/content/2012-01-06-latest-website-propryo-com/propryo_r500.png" alt="Propryo" /></a></p>
+
+
+
+
+<p>For the techies, it should work on mobile browsers as well as desktops, having used a little bit of fluid and <a title="Responsive Web Design" href="http://www.alistapart.com/articles/responsive-web-design/" target="_blank">responsive design</a> and built as a sinatra pure ruby application hosted on <a title="Heroku" href="http://www.heroku.com/" target="_blank">heroku</a>, using <a title="The Official YAML Web Site" href="http://www.yaml.org/" target="_blank">yaml</a> configuration files and photos hosted on <a title="Propryo on Flickr" href="http://www.flickr.com/photos/propryo" target="_blank">flickr</a>.</p>
+
+
+
+
+<p>Any feedback appreciated!</p>
+
+
+    
+
+</article>
+    
+        <article>
+    <header>
+        <time datetime="2011-05-03">May 03, 2011</time>
+        <h1><a href="/kodes" title="Kodes">Kodes</a></h1>
+    </header>
+
+    
+        <p>After creating <a href="/rewriter/">rewriter</a> I received a request at work asking if there was a simple way to test errors views on the front-end code we do at Betfair. As I did not have any real idea at the time, I wrote a dead simple ruby application hosted on my machine to return an HTTP error code, so the front-end would display the correct error messages. It seemed it was a good idea and I improved it by creating <a href="http://ekx.im/D">kodes</a>.</p>
+
+
+
+
+<p class="attachement"><a href="http://kodes.ekynoxe.com" title="Access kodes"><img src="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_title.png" alt="Access kodes" /></a></p>
+
+
+
+
+
+        <a class="button more" href="/kodes" title="read more">read more</a>
+    
+
+</article>
+    
+        <article>
+    <header>
+        <time datetime="2011-04-27">April 27, 2011</time>
+        <h1><a href="/rewriter" title="Rewriter">Rewriter</a></h1>
+    </header>
+
+    
+        <p>I&#8217;ve been thinking in the past to create my own little applications for my own organisation and as a tool suite. The first one to come out is (surprisingly) not a todo app, but a URL shortener/bookmark manager. Check it out: <a href="http://ekx.im" target="_blank">Rewriter</a>.</p>
+
+
+
+
+<p class="attachement"><a href="http://ekx.im" title="Access Rewriter"><img src="http://cdn.ekynoxe.com/content/2011-04-27-rewriter/rewriter-login1.png" alt="Access Rewriter" /></a></p>
+
+
+
+
+
+        <a class="button more" href="/rewriter" title="read more">read more</a>
+    
+
+</article>
+    
+        <article>
+    <header>
+        <time datetime="2011-03-09">March 09, 2011</time>
+        <h1><a href="/percent-w-and-other-ruby-percent-syntax" title="Percent w and other ruby percent syntax">Percent w and other ruby percent syntax</a></h1>
+    </header>
+
+    
+        <p>If you can&#8217;t find what you want to know about ruby percent notations ( %w, %q, %r, %x), then have a look over there:</p>
+
+
+
+
+<p><a href="http://old.blog.jimhoskins.com/?p=8" target="_blank">http://old.blog.jimhoskins.com/?p=8</a></p>
+
+
+
+
+<p>Jim has obviously some other information sources than Google (where trying to search for %w is like trying to find your way in a dense steam room!)</p>
+
+
+
+
+<p>The way to remember things is easy though:</p>
+
+
+
+
+<ul>
+<li>%w is for <strong>W</strong>hite-spaced delimited arrays</li>
+<li>%q works like <strong>Q</strong>uotes</li>
+<li>%r wraps up nicely <strong>R</strong>egular expressions</li>
+<li>%x simply e<strong>X</strong>ecutes system calls</li>
+</ul>
+
+
+
+
+    
+
+</article>
+    
+</section>
+
+
+<nav class="pagination">
+  
+
+  
+    <a class="button next" href="/categories/ruby/page2" title="Next posts"> next</a>
+  
+</nav>
+
+
+<section class="tag_list">
+    <header>
+        <h1>Categories</h1>
+    </header>
+
+    <ul>
+        <li><a href="/categories/apache/" title="apache">apache</a></li> <li><a href="/categories/authlogic/" title="authlogic">authlogic</a></li> <li><a href="/categories/betfair/" title="betfair">betfair</a></li> <li><a href="/categories/code/" title="code">code</a></li> <li><a href="/categories/conferences/" title="conferences">conferences</a></li> <li><a href="/categories/css/" title="css">css</a></li> <li><a href="/categories/cycling/" title="cycling">cycling</a></li> <li><a href="/categories/design/" title="design">design</a></li> <li><a href="/categories/games/" title="games">games</a></li> <li><a href="/categories/git/" title="git">git</a></li> <li><a href="/categories/javascript/" title="javascript">javascript</a></li> <li><a href="/categories/link/" title="link">link</a></li> <li><a href="/categories/mobile/" title="mobile">mobile</a></li> <li><a href="/categories/orange/" title="orange">orange</a></li> <li><a href="/categories/photoshop/" title="photoshop">photoshop</a></li> <li><a href="/categories/ruby/" title="ruby">ruby</a></li> <li><a href="/categories/shopify/" title="shopify">shopify</a></li> <li><a href="/categories/solex/" title="solex">solex</a></li> <li><a href="/categories/testing/" title="testing">testing</a></li> <li><a href="/categories/thoughts/" title="thoughts">thoughts</a></li> <li><a href="/categories/tools/" title="tools">tools</a></li> <li><a href="/categories/travel/" title="travel">travel</a></li> <li><a href="/categories/triathlon/" title="triathlon">triathlon</a></li> <li><a href="/categories/uncategorized/" title="uncategorized">uncategorized</a></li> <li><a href="/categories/ux/" title="ux">ux</a></li> <li><a href="/categories/wordpress/" title="wordpress">wordpress</a></li> <li><a href="/categories/work/" title="work">work</a></li> <li><a href="/categories/work project/" title="work project">work project</a></li> <li><a href="/categories/zend/" title="zend">zend</a></li> 
+    </ul>
+</section>
+
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <header>
+                <a id="contact"></a>
+                <h1>let's talk!</h1>
+                <a title="Compose an email to hello@ekynoxe.com"href="mailto:hello@ekynoxe.com">hello@ekynoxe.com</a></h1>
+            </header>
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2014</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+    </body>
+</html>

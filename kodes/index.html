@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://ww.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Kodes - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+    
+
+
+<ul>
+    <li class="home"><a title="home"  href="/">HOME</a></li>
+    <!-- <li><a title="work"  href="/work">WORK</a></li> -->
+    <li><a title="news" class="selected" href="/news">NEWS</a></li>
+    <li><a title="contact me"  href="/#contact">CONTACT</a></li>
+</ul>
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2011-05-03">May 03, 2011</time>
+                <h1>Kodes</h1>
+            </header>
+
+            <p>After creating <a href="/rewriter/">rewriter</a> I received a request at work asking if there was a simple way to test errors views on the front-end code we do at Betfair. As I did not have any real idea at the time, I wrote a dead simple ruby application hosted on my machine to return an HTTP error code, so the front-end would display the correct error messages. It seemed it was a good idea and I improved it by creating <a href="http://ekx.im/D">kodes</a>.</p>
+
+<p class="attachement"><a href="http://kodes.ekynoxe.com" title="Access kodes"><img src="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_title.png" alt="Access kodes" /></a></p>
+
+
+
+
+<!--more-->
+
+
+<p>Kodes is a simple pure ruby application running on</p>
+
+<p><a href="http://ekx.im/e" target="_blank">Sinatra</a> and hosted, once again on <a href="http://ekx.im/U" target="_blank">heroku</a>. As it says on the tin: <em>kodes is a simple service that allows you to test that your applications handle HTTP response codes properly.</em></p>
+
+<p>So all you have to do is to send a request to http://kodes.ekynoxe.com/k/<strong>&lt;your-code&gt;</strong> and it *should* return the corresponding HTTP status code in the response, along with a description of the code itself, as per the HTTP/1.1 specifications.</p>
+
+<p>Now, I say *should* because some status codes like the 1xx family simply instruct browsers to keep going with a request. All browsers should comply with this and not do anything until another response like a 2xx or 4xx is received. The bad news is that you won&#8217;t see a snazzy description page like this one for the <a href="http://kodes.ekynoxe.com/k/306" target="_blank">306 code</a> (unused!), but if you use curl (or any other http request library that is NOT a browser), you should see the response with the correct status code:</p>
+
+<pre class="brush: bash; gutter: false; title: ; notranslate" title="">$ curl -0v http://kodes.ekynoxe.com/k/306
+</pre>
+
+
+<p>Also, the code is hosted on github at <a href="http://ekx.im/a7" target="_blank">https://github.com/ekynoxe/kodes</a></p>
+
+<p>I hope this is as helpful to you that it is to our teams of developers here! Enjoy.</p>
+
+<div class='gallery'>
+    <dl class='gallery-item'>
+        <dt class='gallery-icon attachement'>
+          <a href="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_home.png" title="kodes home" rel="lightbox[498]"><img src="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_home_r300.png" alt="kodes home" /></a>
+        </dt>
+    </dl>
+    <dl class='gallery-item'>
+        <dt class='gallery-icon attachement'>
+          <a href="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_306.png" title="kodes 306" rel="lightbox[498]"><img src="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_306_r300.png" alt="kodes 306" /></a>
+        </dt>
+    </dl>
+    <dl class='gallery-item'>
+        <dt class='gallery-icon attachement'>
+          <a href="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_502.png" title="kodes 502" rel="lightbox[498]"><img src="http://cdn.ekynoxe.com/content/2011-05-03-kodes/kodes_502_r300.png" alt="kodes 502" /></a>
+        </dt>
+    </dl>
+</div>
+
+
+
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/rewriter" title="Rewriter">previous </a>
+
+    <a class="button next" href="/orange" title="Orange"> next</a>
+    </div>
+
+    
+    <section class="comments">
+        <h2>comments</h2>
+        <ul>
+
+
+    <li>
+        <h3>
+    
+        <a href="http://blog.ivandemarino.me" title="IvanDM">IvanDM</a>
+    
+        <small>Tue, 03 May 2011 - 13:18</small></h3>
+        <p>Unsued? ;)</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Tue, 03 May 2011 - 14:17</small></h3>
+        <p>Woops! Corrected =) Thks</p>
+
+        
+        
+
+    </li>
+
+</ul>
+    </section>
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=Kodes">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <header>
+                <a id="contact"></a>
+                <h1>let's talk!</h1>
+                <a title="Compose an email to hello@ekynoxe.com"href="mailto:hello@ekynoxe.com">hello@ekynoxe.com</a></h1>
+            </header>
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2014</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+    </body>
+</html>

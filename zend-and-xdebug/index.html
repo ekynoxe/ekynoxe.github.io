@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://ww.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Zend and Xdebug - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+    
+
+
+<ul>
+    <li class="home"><a title="home"  href="/">HOME</a></li>
+    <!-- <li><a title="work"  href="/work">WORK</a></li> -->
+    <li><a title="news" class="selected" href="/news">NEWS</a></li>
+    <li><a title="contact me"  href="/#contact">CONTACT</a></li>
+</ul>
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2009-09-17">September 17, 2009</time>
+                <h1>Zend and Xdebug</h1>
+            </header>
+
+            <p>After having coded most of my sites all from scratch with some of my own libraries, I am getting into using Zend framework, PHPUnit, and Xdebug.</p>
+
+<p>If the two first ones have been of little trouble to install, I can&#8217;t say the same for Xdebug.</p>
+
+<!--more-->
+
+
+<p>At first I have followed all the common tutorials that you can find around the web:</p>
+
+<ul>
+<li>downloading the pre-compiled xdebug.so for my PHP install</li>
+<li>simply copying to the proper folder</li>
+<li>modifying my php.ini configuration by adding the correct zend_extension parameter for [xdebug].</li>
+</ul>
+
+
+<p>Until here, nothing fancy, it seems to work for most. BUT, when every install how-to on the web says &#8220;that&#8217;s it you&#8217;re done&#8221;, nothing happened for me. Xdebug was not loaded, there was no error message and everything was still running fine.</p>
+
+<p>That&#8217;s when things started to get complicated, given the amount of combination possible of wrong configuration parameters and pre-compiled available shared objects, <strong>all of which would fail silently if anything would go wrong</strong>.</p>
+
+<p>I tried to change zend_extension to zend_extension_ts because I was running PHP 5.2.8, but this did not change anything, I tried to compile xdebug.so manually and use the compiled object with the several parameters combination I have already tested with the pre-compiled version&#8230; Nothing. not single error or idicatio that could put me on the right way!</p>
+
+<p>Then, I came across an old article on <a href="http://devzone.zend.com/article/2803">devzone.zend.com</a> that I have discarded at first for its age (December 2007&#8230;) but that I ended up reading thoroughly and the following lines flashed before me:</p>
+
+<p><em>Please note that phpize and php-config must match the PHP version you are using, so do not just copy them to your system from some other PHP installation. When your development tools are in place, you can download and compile xdebug</em></p>
+
+<p>The phpize command on my system was not pointing to the proper one, as I compiled my own AMP install on the Mac. Running the proper phpize (in /usr/local/php/bin/ for me), it gave kind of a weird result:</p>
+
+<pre>PHP Api Version: 20041225
+Zend Module Api No:
+Zend Extension Api No:</pre>
+
+
+<p>Yep! No Zend API version numbers at all. As phpise is a simple shell script that extracts the API numbers from the PHP and Zend configurations, I thought there was a problem simply with my PHP install, and not with xdebug at all.</p>
+
+<p>As I was running 5.2.8, I upgraded to PHP 5.3, cleaned all xdebug.so files, cleaned my php.ini file and tried it all again!</p>
+
+<p>The pre-compiled version <strong>DID NOT WORK</strong> either, but compiling it myself from source, this time phpize giving the right API numbers:</p>
+
+<pre>PHP Api Version: 20090626
+Zend Module Api No: 20090626
+Zend Extension Api No: 220090626
+</pre>
+
+
+<p>And finally xdebug worked!
+So, a few things to remember:</p>
+
+<ul>
+<li>sort your PHP install properly first, with the commands pointing to the right places. That&#8217;s also valid for php-config that is required for the compilation of xdebug</li>
+<li>trying the pre-compiled version might not work on your system, so compile your own, it&#8217;s simple enough and the article on zend.com(<a href="http://devzone.zend.com/article/2803">http://devzone.zend.com/article/2803</a>), albeit old, is still valid</li>
+</ul>
+
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/fix-that-web-site" title="Fix that Web Site!">previous </a>
+
+    <a class="button next" href="/403" title="403"> next</a>
+    </div>
+
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=Zend and Xdebug">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <header>
+                <a id="contact"></a>
+                <h1>let's talk!</h1>
+                <a title="Compose an email to hello@ekynoxe.com"href="mailto:hello@ekynoxe.com">hello@ekynoxe.com</a></h1>
+            </header>
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2014</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+    </body>
+</html>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+        <loc>http://www.ekynoxe.com/10-years</loc>
+    </url><url>
         <loc>http://www.ekynoxe.com/closing-the-hammersmith-barrier-website</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/ellen-now-ready-for-home-visits</loc>
@@ -194,5 +196,7 @@
         <loc>http://www.ekynoxe.com/categories/games/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/solex/</loc>
+    </url><url>
+        <loc>http://www.ekynoxe.com/categories/identity/</loc>
     </url>
 </urlset>

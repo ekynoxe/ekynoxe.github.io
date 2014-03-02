@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://ww.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>On Jekyll - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+    
+
+
+<ul>
+    <li class="home"><a title="home"  href="/">HOME</a></li>
+    <!-- <li><a title="work"  href="/work">WORK</a></li> -->
+    <li><a title="news" class="selected" href="/news">NEWS</a></li>
+    <li><a title="contact me"  href="/#contact">CONTACT</a></li>
+</ul>
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2014-03-02">March 02, 2014</time>
+                <h1>On Jekyll</h1>
+            </header>
+
+            <p>That&rsquo;s it! At long last, I&rsquo;ve migrated my personal sites away from Wordpress. My blog and websites have been in need of a design overhaul for a long time, and as I was growing tired of the incessant and ever larger updates required by Wordpress and its plugins, I decided to switch to a static site generator.</p>
+
+<p>Exit Wordpress, enters Jekyll.</p>
+
+<p class="attachement"><span><img src="http://cdn.ekynoxe.com/content/2014-03-02-on-jekyll/wp_to_jkl.jpg" alt="Wordpress to Jekyll" /></span></p>
+
+
+
+
+<!--more-->
+
+
+<p>For too many years, this migration and redesign has been put on the back burner because of client&rsquo;s work, or heavy training for my &ldquo;little hobby&rdquo;: triathlon. I managed to find a little time here and there over the last year to make some way on a new design, but it&rsquo;s only in the last few months that I really gave it a good push. With a few HTML templates and a clean CSS all ready, I only had to dig into Jekyll and start the migration process.</p>
+
+<h2>Why leave Wordpress?</h2>
+
+<ol>
+<li><p>I still remember the first version I used. Wordpress was a super small and very fast CMS to quickly publish posts with some image attachments. It was fast to use, easy to install on any LAMP stack, and fairly easy to maintain. That was before bloat arrived. In the past few years, I&rsquo;ve had to deal with too many core upgrades, not just for my site, but also for the others I manage, and frankly, it&rsquo;s been a pain every time.</p>
+
+<p> If you have a simple hosted blog on wordpress.com, chances are you don&rsquo;t see any of this, but custom websites on WP can be a real pain.</p>
+
+<p> So, I was tired of fortnightly &ldquo;security&rdquo; upgrades where I had to re-upload almost a full website every time, and then go through the pain of checking that every plugin still worked happily with its neighbour and the new core code.</p>
+
+<p> Wordpress has its use and it&rsquo;s probably serving millions very well. Not me. Not any-more.</p></li>
+<li><p>I wanted a completely clean slate for my new site. Not another Wordpress theme migration whilst trying to find why a core method has been magically deprecated and that its replacement signature isn&rsquo;t the same. I was going for a new design, a new structure, and more importantly, a new <em>content</em> structure. So starting from scratch was the best option to have a clean site on all fronts.</p></li>
+<li><p>Then, I simply wanted to learn Jekyll. It promised to fulfil every one of my geek developer fantasies of being in control of everything, and all from the command line. I could finally go nuts on my &ldquo;own&rdquo; platform without having to reinvent the wheel from scratch.</p></li>
+<li><p>It would also be a good opportunity to dig into some open source projects and maybe create and share some useful plugins of my own. This is what I did and some posts will come at a later date detailing my own plugins.</p></li>
+<li><p>I wanted to see if I could increase the little SEO juice I&rsquo;m getting by adopting a cleaner and simpler URL structure, and I didn&rsquo;t see myself moving all this within a single Wordpress install without a lot of pain.</p></li>
+</ol>
+
+
+<p>Blank slate and big expectations, then. Much like a brand new project.</p>
+
+<h2>What is Jekyll?</h2>
+
+<p>Jekyll is a static website generator. For those of you who still wonder what that means, it&rsquo;s pretty easy: from a set of common files on your computer, jekyll will assemble a full website in plain html files. No PHP, no &ldquo;request-time assembly&rdquo;, no server logic. At all! Once written, the files aren&rsquo;t changed by the server, and what clients request are only those files. That also means no database, and no dynamic code! Aside from the simplicity of the hosting setup, it most importantly means that you can completely do away with having them available in the first place, even in your local environment. All you need is a web server that dishes out plain HTML files, and that&rsquo;s all.
+It also means a much faster website to serve to your clients.</p>
+
+<p>I hear you say: &ldquo;But without a database or dynamic code, all in static files, that sounds a bit like a step back, doesn&rsquo;t it?&rdquo;</p>
+
+<p>You may be right for certain purposes, but in my context of a simple website, I didn&rsquo;t need any dynamic code or a even a database. Actually, my content never needed this, and probably a lot of websites out there simply don&rsquo;t need a database either. For most, it&rsquo;s just a convenient way to store data, but there&rsquo;s absolutely no need for it if you have something like Jekyll.</p>
+
+<p>If you&rsquo;re a developer and have written a few web pages, then think about that time all the way back when YOU started web development. If you are a total web developer novice, or even better, if you&rsquo;d try to teach web development to someone new to it: how did / would you start? Probably with a basic html file. You&rsquo;d probably write a few by hand, put them all into a directory, maybe upload them to the FTP server of a basic web host, and you&rsquo;d have your first website.</p>
+
+<p>Essentially, that&rsquo;s what Jekyll creates for you: it creates <strong>static</strong> files like you&rsquo;d do by hand. And by automating the generation process, it simplifies the whole thing a fair bit. But that&rsquo;s the easy part of the story. Writing and hosting content for a site generated by Jekyll is dead easy, but unsurprisingly, there&rsquo;s a bit of a journey to get there.</p>
+
+<h2>Configuration / personalisation</h2>
+
+<p>Before you write or deploy your website, there&rsquo;s an absolute nerd part, which is the preparation of your &ldquo;developer&rdquo; or &ldquo;author&rdquo; environment, its configuration, and the plugins you may need.</p>
+
+<p>There are <a href="http://jekyllbootstrap.com/">tons</a> of <a href="http://code.tutsplus.com/tutorials/building-static-sites-with-jekyll--net-22211">on-line</a> <a href="http://www.daveperrett.com/articles/2010/10/12/static-blogging-the-jekyll-way/">guides for Jekyll</a> and reports of how others did it, which has been a great help, but the very one thing that you&rsquo;ll need if you want to get started easily, is to fork someone&rsquo;s Jekyll repository. That way you will have something that works straight away and that you can start hacking around to make your own.</p>
+
+<p>I started mine from <a href="http://nefariousdesigns.co.uk/">Tim&rsquo;s</a> <a href="https://github.com/nefarioustim/kitchen">&ldquo;kitchen&rdquo; project</a>, and the configuration+Rakefile already in there was a godsend to quickly get to speed. I have since added a lot to it and made it mine, but some utilities like the Rakefile haven&rsquo;t changed much. You can also find <a href="https://github.com/ekynoxe/ekynoxe.com">the source of this very website on Github</a></p>
+
+<p>If you want a migration guide, you can do like I did: follow the excellent one <a href="http://paulstamatiou.com/how-to-Wordpress-to-jekyll/">written by Paul Stamatiou</a> and discard what you don&rsquo;t need. I don&rsquo;t have a special host other than Github pages, so I didn&rsquo;t even look at the Apache stuff, and although my images are on S3+Cloudfront, I haven&rsquo;t gone around automating the deployment process yet. The same goes for comments (more on that further), or special posts types.</p>
+
+<p>The great thing about Jekyll is that it can be as simple or as complex as you want. As Paul mentions, beware of generation time for large sites, but do apply your own sauce to what you do.</p>
+
+<p>If you want to go to ultra-basics, then the <a href="http://jekyllrb.com/">Jekyll website</a> itself will give you some information. But trust me, after spending hours trying to figure out how plugins or other configuration parameters work, you&rsquo;re much better of looking a code!</p>
+
+<h2>My own setup</h2>
+
+<p>One of the goals of getting rid of Wordpress for my own site had always been to get rid of my hosting package. Even if you can host a Wordpress install for free on excellent cloud platforms like <a href="https://www.openshift.com/">openshift</a> or <a href="https://www.heroku.com/">Heroku</a>, you will still have to maintain your platform more or less completely, or jump through some hoops to host a static pages website on a host that&rsquo;s not really intended for it. With Jekyll, I decided to use <a href="http://pages.github.com/">Github pages</a> for hosting, as recommended by many. All you have to do is push either the source of your Jekyll website or the generated static site to a special Github repository on your account, and it gets automatically deployed for you.</p>
+
+<p>If you follow the first solution (e.g. you don&rsquo;t generate your website &ldquo;locally&rdquo; on your local home machine), there is one thing that Github doesn&rsquo;t do well: custom plugins. Obviously, for security reasons and to prevent the execution of rogue code on their servers, Github allows only a very limited set of Jekyll plugins to be used as part of websites <strong>generated</strong> directly on the github pages. Read this well: &ldquo;generated on github&rdquo;. That means that if you don&rsquo;t generate your site locally, github will not generate your site if you need custom plugins.</p>
+
+<p>However, you can still use your own plugins if you want, but you&rsquo;ll have to generate your site on your local machine, and push only the result of that to your website&rsquo;s Github pages repository.</p>
+
+<p>If you&rsquo;re still puzzled, there are also some <a href="http://blog.sorryapp.com/blogging-with-jekyll/2014/01/31/using-jekyll-plugins-on-github-pages.html">handy guides for you to read</a>!</p>
+
+<p>That&rsquo;s what I&rsquo;ve done for my own setup, and that allowed me to write my own little plugins including:</p>
+
+<ul>
+<li>a &ldquo;301 redirect generator&rdquo; that creates a file pre formatted with all you need to migrate a Wordpress install: drop the result in a .htaccess of an Apache install and you&rsquo;re good to go.</li>
+<li>a &ldquo;comments mapping plugin&rdquo; that takes a comments json file (generated from a Wordpress WXR file), and attaches them to the correct posts as an array to use in post generation templates.</li>
+<li>a &ldquo;categories page generator&rdquo;: based on the categories of each post (as written in their <a href="http://jekyllrb.com/docs/frontmatter/">YAML Front Matter</a>), categories will be available under /categories/[cat_name], including pagination options</li>
+<li>a &ldquo;categories list generator&rdquo; to generate an unordered list to display on your templates pages</li>
+<li>a set of helpers to automatically generate CDN urls for posts attachments.</li>
+</ul>
+
+
+<p>On top of this I&rsquo;ve added an RSS feed and a site map generator based on <a href="http://paulstamatiou.com/how-to-Wordpress-to-jekyll/">Paul&rsquo;s work</a>.</p>
+
+<p>Deployment-wise, I wanted to use one common structure for two websites: this web orientated website, and another one dedicated to my triathlon passion. That means two static websites hosted on Github, but only one main repository that contains all the posts and jekyll source code, posts and specific configuration for each site being separated on their own git branches.</p>
+
+<p>Overall, I now have three repositories:</p>
+
+<ul>
+<li>one main repository for the core Jekyll stuff and all the plugins</li>
+<li>one repository for the static files of my <a href="http://www.ekynoxe.com">web-development / professional website</a></li>
+<li>one repository for the static files of my <a href="http://tri.ekynoxe.com">triathlon ramblings website</a></li>
+</ul>
+
+
+<p>It&rsquo;s very simple: the last two are being fed the result of &ldquo;jekyll build&rdquo; from within the main repository.
+As I am using rake tasks to simplify my life around Jekyll, all I have to do to publish a post on one or the other is switch to the correct content branch, write, commit, and execute &ldquo;rake generate&rdquo;. Everything else is taken care of automatically.</p>
+
+<p>Again, follow <a href="http://blog.sorryapp.com/blogging-with-jekyll/2014/01/31/using-jekyll-plugins-on-github-pages.html">this guide</a> to mimic this setup.</p>
+
+<p>If you&rsquo;ve set-up your own website in a similar way, at this point, you should have something working well. However, if you&rsquo;re hosting a blog, there&rsquo;s one thing you may miss: comments!</p>
+
+<h2>Comments</h2>
+
+<p>This is a very contentious issue.
+As Jekyll will generate a static website, it means once online, there will be nothing that can respond to a form POST on your server. That means no &ldquo;classic&rdquo; comments. I mean &ldquo;classic&rdquo; in the technological, HTTP way here.</p>
+
+<p>The only solutions you have so far are third party commenting systems like <a href="http://disqus.com/">Disqus</a>, <a href="https://moot.it/">Moot.it</a>, <a href="http://web.livefyre.com/">Livefyre</a> or others.</p>
+
+<p>I&rsquo;ve tried them, each to a certain degree of completeness, but Moot and Livefyre didn&rsquo;t correspond to my needs, and after trying to import my comments from Wordpress into Disqus, having a debate with myself about leaving <strong>my</strong> content (comments on <strong>my</strong> content) with a third party, and reading numerous horror stories about transfers going wrong, I decided to NOT use Disqus in the end. In fact I decided to not use any third party comment system at all. I&rsquo;ve deleted my Disqus account, and I transferred all my old comments to this new site, and I&rsquo;ll build my own commenting system in the future, hopefully with spam control, and as one that should be available open source for self hosting so you can use it too.</p>
+
+<h2>Things I haven&rsquo;t done yet</h2>
+
+<ul>
+<li>Search: I&rsquo;ll add a site search at some point. Unlike Tim&rsquo;s <a href="http://nefariousdesigns.co.uk/">fantastic web resources site</a>, I don&rsquo;t have the same link juice and my posts don&rsquo;t appear on many search engines yet. So a little site search could help.</li>
+<li>Polish the publication process, especially around drafts and image uploads. At the moment, it&rsquo;s quite an intensive manual process to create and upload images and galleries. Especially for my triathlon site where I sometimes have 40 photos attached to a post, all with their thumbnail versions. Hopefully I&rsquo;ll come around to do a little plugin to help with image resizing, gallery generation, and upload to S3 / Cloudfront during the publication process through an extension to my Rake tasks.</li>
+</ul>
+
+
+<h2>Not for everyone</h2>
+
+<p>This is a nerd publishing platform. There is a lot to set up initially, and despite the <a href="http://jekyllbootstrap.com/">best efforts of some</a>, there are no &ldquo;Jekyll for dummies&rdquo; guides. You must know your way around code, around ruby, around your terminal and around git and Github. At a minimum.</p>
+
+<p>But none of this is an issue for me: I&rsquo;m a nerd, and I love it! It&rsquo;s small, and I&rsquo;m in control of everything locally, on my computer. The plugins I now use are pretty much all self-built, and the only thing that could go wrong in the future is my ruby version clashing with an old Jekyll install.</p>
+
+<p>Other than this, the site generated is static, so there&rsquo;s really nothing wrong in that!</p>
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/10-years" title="10 years!">previous </a>
+
+    
+    </div>
+
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=On Jekyll">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <header>
+                <a id="contact"></a>
+                <h1>let's talk!</h1>
+                <a title="Compose an email to hello@ekynoxe.com"href="mailto:hello@ekynoxe.com">hello@ekynoxe.com</a></h1>
+            </header>
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2014</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-8194968-1', 'ekynoxe.com');ga('send', 'pageview');</script>
+    </body>
+</html>

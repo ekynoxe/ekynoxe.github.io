@@ -6,8 +6,142 @@
         <link>http://ww.ekynoxe.com</link>
         <atom:link href="http://ww.ekynoxe.com/feed.xml" rel="self" type="application/rss+xml" />
         <language>en-gb</language>
-        <pubDate>Sun, 16 Feb 2014 21:38:13 +0000</pubDate>
-        <lastBuildDate>Sun, 16 Feb 2014 21:38:13 +0000</lastBuildDate>
+        <pubDate>Sun, 02 Mar 2014 19:27:31 +0000</pubDate>
+        <lastBuildDate>Sun, 02 Mar 2014 19:27:31 +0000</lastBuildDate>
+        
+            <item>
+                <title>On Jekyll</title>
+                <description>&lt;p&gt;That&amp;rsquo;s it! At long last, I&amp;rsquo;ve migrated my personal sites away from Wordpress. My blog and websites have been in need of a design overhaul for a long time, and as I was growing tired of the incessant and ever larger updates required by Wordpress and its plugins, I decided to switch to a static site generator.&lt;/p&gt;
+
+&lt;p&gt;Exit Wordpress, enters Jekyll.&lt;/p&gt;
+
+&lt;p class=&quot;attachement&quot;&gt;&lt;span&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2014-03-02-on-jekyll/wp_to_jkl.jpg&quot; alt=&quot;Wordpress to Jekyll&quot; /&gt;&lt;/span&gt;&lt;/p&gt;
+
+
+
+
+&lt;!--more--&gt;
+
+
+&lt;p&gt;For too many years, this migration and redesign has been put on the back burner because of client&amp;rsquo;s work, or heavy training for my &amp;ldquo;little hobby&amp;rdquo;: triathlon. I managed to find a little time here and there over the last year to make some way on a new design, but it&amp;rsquo;s only in the last few months that I really gave it a good push. With a few HTML templates and a clean CSS all ready, I only had to dig into Jekyll and start the migration process.&lt;/p&gt;
+
+&lt;h2&gt;Why leave Wordpress?&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;I still remember the first version I used. Wordpress was a super small and very fast CMS to quickly publish posts with some image attachments. It was fast to use, easy to install on any LAMP stack, and fairly easy to maintain. That was before bloat arrived. In the past few years, I&amp;rsquo;ve had to deal with too many core upgrades, not just for my site, but also for the others I manage, and frankly, it&amp;rsquo;s been a pain every time.&lt;/p&gt;
+
+&lt;p&gt; If you have a simple hosted blog on wordpress.com, chances are you don&amp;rsquo;t see any of this, but custom websites on WP can be a real pain.&lt;/p&gt;
+
+&lt;p&gt; So, I was tired of fortnightly &amp;ldquo;security&amp;rdquo; upgrades where I had to re-upload almost a full website every time, and then go through the pain of checking that every plugin still worked happily with its neighbour and the new core code.&lt;/p&gt;
+
+&lt;p&gt; Wordpress has its use and it&amp;rsquo;s probably serving millions very well. Not me. Not any-more.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;I wanted a completely clean slate for my new site. Not another Wordpress theme migration whilst trying to find why a core method has been magically deprecated and that its replacement signature isn&amp;rsquo;t the same. I was going for a new design, a new structure, and more importantly, a new &lt;em&gt;content&lt;/em&gt; structure. So starting from scratch was the best option to have a clean site on all fronts.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Then, I simply wanted to learn Jekyll. It promised to fulfil every one of my geek developer fantasies of being in control of everything, and all from the command line. I could finally go nuts on my &amp;ldquo;own&amp;rdquo; platform without having to reinvent the wheel from scratch.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It would also be a good opportunity to dig into some open source projects and maybe create and share some useful plugins of my own. This is what I did and some posts will come at a later date detailing my own plugins.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;I wanted to see if I could increase the little SEO juice I&amp;rsquo;m getting by adopting a cleaner and simpler URL structure, and I didn&amp;rsquo;t see myself moving all this within a single Wordpress install without a lot of pain.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;Blank slate and big expectations, then. Much like a brand new project.&lt;/p&gt;
+
+&lt;h2&gt;What is Jekyll?&lt;/h2&gt;
+
+&lt;p&gt;Jekyll is a static website generator. For those of you who still wonder what that means, it&amp;rsquo;s pretty easy: from a set of common files on your computer, jekyll will assemble a full website in plain html files. No PHP, no &amp;ldquo;request-time assembly&amp;rdquo;, no server logic. At all! Once written, the files aren&amp;rsquo;t changed by the server, and what clients request are only those files. That also means no database, and no dynamic code! Aside from the simplicity of the hosting setup, it most importantly means that you can completely do away with having them available in the first place, even in your local environment. All you need is a web server that dishes out plain HTML files, and that&amp;rsquo;s all.
+It also means a much faster website to serve to your clients.&lt;/p&gt;
+
+&lt;p&gt;I hear you say: &amp;ldquo;But without a database or dynamic code, all in static files, that sounds a bit like a step back, doesn&amp;rsquo;t it?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;You may be right for certain purposes, but in my context of a simple website, I didn&amp;rsquo;t need any dynamic code or a even a database. Actually, my content never needed this, and probably a lot of websites out there simply don&amp;rsquo;t need a database either. For most, it&amp;rsquo;s just a convenient way to store data, but there&amp;rsquo;s absolutely no need for it if you have something like Jekyll.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re a developer and have written a few web pages, then think about that time all the way back when YOU started web development. If you are a total web developer novice, or even better, if you&amp;rsquo;d try to teach web development to someone new to it: how did / would you start? Probably with a basic html file. You&amp;rsquo;d probably write a few by hand, put them all into a directory, maybe upload them to the FTP server of a basic web host, and you&amp;rsquo;d have your first website.&lt;/p&gt;
+
+&lt;p&gt;Essentially, that&amp;rsquo;s what Jekyll creates for you: it creates &lt;strong&gt;static&lt;/strong&gt; files like you&amp;rsquo;d do by hand. And by automating the generation process, it simplifies the whole thing a fair bit. But that&amp;rsquo;s the easy part of the story. Writing and hosting content for a site generated by Jekyll is dead easy, but unsurprisingly, there&amp;rsquo;s a bit of a journey to get there.&lt;/p&gt;
+
+&lt;h2&gt;Configuration / personalisation&lt;/h2&gt;
+
+&lt;p&gt;Before you write or deploy your website, there&amp;rsquo;s an absolute nerd part, which is the preparation of your &amp;ldquo;developer&amp;rdquo; or &amp;ldquo;author&amp;rdquo; environment, its configuration, and the plugins you may need.&lt;/p&gt;
+
+&lt;p&gt;There are &lt;a href=&quot;http://jekyllbootstrap.com/&quot;&gt;tons&lt;/a&gt; of &lt;a href=&quot;http://code.tutsplus.com/tutorials/building-static-sites-with-jekyll--net-22211&quot;&gt;on-line&lt;/a&gt; &lt;a href=&quot;http://www.daveperrett.com/articles/2010/10/12/static-blogging-the-jekyll-way/&quot;&gt;guides for Jekyll&lt;/a&gt; and reports of how others did it, which has been a great help, but the very one thing that you&amp;rsquo;ll need if you want to get started easily, is to fork someone&amp;rsquo;s Jekyll repository. That way you will have something that works straight away and that you can start hacking around to make your own.&lt;/p&gt;
+
+&lt;p&gt;I started mine from &lt;a href=&quot;http://nefariousdesigns.co.uk/&quot;&gt;Tim&amp;rsquo;s&lt;/a&gt; &lt;a href=&quot;https://github.com/nefarioustim/kitchen&quot;&gt;&amp;ldquo;kitchen&amp;rdquo; project&lt;/a&gt;, and the configuration+Rakefile already in there was a godsend to quickly get to speed. I have since added a lot to it and made it mine, but some utilities like the Rakefile haven&amp;rsquo;t changed much. You can also find &lt;a href=&quot;https://github.com/ekynoxe/ekynoxe.com&quot;&gt;the source of this very website on Github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you want a migration guide, you can do like I did: follow the excellent one &lt;a href=&quot;http://paulstamatiou.com/how-to-Wordpress-to-jekyll/&quot;&gt;written by Paul Stamatiou&lt;/a&gt; and discard what you don&amp;rsquo;t need. I don&amp;rsquo;t have a special host other than Github pages, so I didn&amp;rsquo;t even look at the Apache stuff, and although my images are on S3+Cloudfront, I haven&amp;rsquo;t gone around automating the deployment process yet. The same goes for comments (more on that further), or special posts types.&lt;/p&gt;
+
+&lt;p&gt;The great thing about Jekyll is that it can be as simple or as complex as you want. As Paul mentions, beware of generation time for large sites, but do apply your own sauce to what you do.&lt;/p&gt;
+
+&lt;p&gt;If you want to go to ultra-basics, then the &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll website&lt;/a&gt; itself will give you some information. But trust me, after spending hours trying to figure out how plugins or other configuration parameters work, you&amp;rsquo;re much better of looking a code!&lt;/p&gt;
+
+&lt;h2&gt;My own setup&lt;/h2&gt;
+
+&lt;p&gt;One of the goals of getting rid of Wordpress for my own site had always been to get rid of my hosting package. Even if you can host a Wordpress install for free on excellent cloud platforms like &lt;a href=&quot;https://www.openshift.com/&quot;&gt;openshift&lt;/a&gt; or &lt;a href=&quot;https://www.heroku.com/&quot;&gt;Heroku&lt;/a&gt;, you will still have to maintain your platform more or less completely, or jump through some hoops to host a static pages website on a host that&amp;rsquo;s not really intended for it. With Jekyll, I decided to use &lt;a href=&quot;http://pages.github.com/&quot;&gt;Github pages&lt;/a&gt; for hosting, as recommended by many. All you have to do is push either the source of your Jekyll website or the generated static site to a special Github repository on your account, and it gets automatically deployed for you.&lt;/p&gt;
+
+&lt;p&gt;If you follow the first solution (e.g. you don&amp;rsquo;t generate your website &amp;ldquo;locally&amp;rdquo; on your local home machine), there is one thing that Github doesn&amp;rsquo;t do well: custom plugins. Obviously, for security reasons and to prevent the execution of rogue code on their servers, Github allows only a very limited set of Jekyll plugins to be used as part of websites &lt;strong&gt;generated&lt;/strong&gt; directly on the github pages. Read this well: &amp;ldquo;generated on github&amp;rdquo;. That means that if you don&amp;rsquo;t generate your site locally, github will not generate your site if you need custom plugins.&lt;/p&gt;
+
+&lt;p&gt;However, you can still use your own plugins if you want, but you&amp;rsquo;ll have to generate your site on your local machine, and push only the result of that to your website&amp;rsquo;s Github pages repository.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re still puzzled, there are also some &lt;a href=&quot;http://blog.sorryapp.com/blogging-with-jekyll/2014/01/31/using-jekyll-plugins-on-github-pages.html&quot;&gt;handy guides for you to read&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s what I&amp;rsquo;ve done for my own setup, and that allowed me to write my own little plugins including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;a &amp;ldquo;301 redirect generator&amp;rdquo; that creates a file pre formatted with all you need to migrate a Wordpress install: drop the result in a .htaccess of an Apache install and you&amp;rsquo;re good to go.&lt;/li&gt;
+&lt;li&gt;a &amp;ldquo;comments mapping plugin&amp;rdquo; that takes a comments json file (generated from a Wordpress WXR file), and attaches them to the correct posts as an array to use in post generation templates.&lt;/li&gt;
+&lt;li&gt;a &amp;ldquo;categories page generator&amp;rdquo;: based on the categories of each post (as written in their &lt;a href=&quot;http://jekyllrb.com/docs/frontmatter/&quot;&gt;YAML Front Matter&lt;/a&gt;), categories will be available under /categories/[cat_name], including pagination options&lt;/li&gt;
+&lt;li&gt;a &amp;ldquo;categories list generator&amp;rdquo; to generate an unordered list to display on your templates pages&lt;/li&gt;
+&lt;li&gt;a set of helpers to automatically generate CDN urls for posts attachments.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;On top of this I&amp;rsquo;ve added an RSS feed and a site map generator based on &lt;a href=&quot;http://paulstamatiou.com/how-to-Wordpress-to-jekyll/&quot;&gt;Paul&amp;rsquo;s work&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Deployment-wise, I wanted to use one common structure for two websites: this web orientated website, and another one dedicated to my triathlon passion. That means two static websites hosted on Github, but only one main repository that contains all the posts and jekyll source code, posts and specific configuration for each site being separated on their own git branches.&lt;/p&gt;
+
+&lt;p&gt;Overall, I now have three repositories:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;one main repository for the core Jekyll stuff and all the plugins&lt;/li&gt;
+&lt;li&gt;one repository for the static files of my &lt;a href=&quot;http://www.ekynoxe.com&quot;&gt;web-development / professional website&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;one repository for the static files of my &lt;a href=&quot;http://tri.ekynoxe.com&quot;&gt;triathlon ramblings website&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;It&amp;rsquo;s very simple: the last two are being fed the result of &amp;ldquo;jekyll build&amp;rdquo; from within the main repository.
+As I am using rake tasks to simplify my life around Jekyll, all I have to do to publish a post on one or the other is switch to the correct content branch, write, commit, and execute &amp;ldquo;rake generate&amp;rdquo;. Everything else is taken care of automatically.&lt;/p&gt;
+
+&lt;p&gt;Again, follow &lt;a href=&quot;http://blog.sorryapp.com/blogging-with-jekyll/2014/01/31/using-jekyll-plugins-on-github-pages.html&quot;&gt;this guide&lt;/a&gt; to mimic this setup.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve set-up your own website in a similar way, at this point, you should have something working well. However, if you&amp;rsquo;re hosting a blog, there&amp;rsquo;s one thing you may miss: comments!&lt;/p&gt;
+
+&lt;h2&gt;Comments&lt;/h2&gt;
+
+&lt;p&gt;This is a very contentious issue.
+As Jekyll will generate a static website, it means once online, there will be nothing that can respond to a form POST on your server. That means no &amp;ldquo;classic&amp;rdquo; comments. I mean &amp;ldquo;classic&amp;rdquo; in the technological, HTTP way here.&lt;/p&gt;
+
+&lt;p&gt;The only solutions you have so far are third party commenting systems like &lt;a href=&quot;http://disqus.com/&quot;&gt;Disqus&lt;/a&gt;, &lt;a href=&quot;https://moot.it/&quot;&gt;Moot.it&lt;/a&gt;, &lt;a href=&quot;http://web.livefyre.com/&quot;&gt;Livefyre&lt;/a&gt; or others.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ve tried them, each to a certain degree of completeness, but Moot and Livefyre didn&amp;rsquo;t correspond to my needs, and after trying to import my comments from Wordpress into Disqus, having a debate with myself about leaving &lt;strong&gt;my&lt;/strong&gt; content (comments on &lt;strong&gt;my&lt;/strong&gt; content) with a third party, and reading numerous horror stories about transfers going wrong, I decided to NOT use Disqus in the end. In fact I decided to not use any third party comment system at all. I&amp;rsquo;ve deleted my Disqus account, and I transferred all my old comments to this new site, and I&amp;rsquo;ll build my own commenting system in the future, hopefully with spam control, and as one that should be available open source for self hosting so you can use it too.&lt;/p&gt;
+
+&lt;h2&gt;Things I haven&amp;rsquo;t done yet&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Search: I&amp;rsquo;ll add a site search at some point. Unlike Tim&amp;rsquo;s &lt;a href=&quot;http://nefariousdesigns.co.uk/&quot;&gt;fantastic web resources site&lt;/a&gt;, I don&amp;rsquo;t have the same link juice and my posts don&amp;rsquo;t appear on many search engines yet. So a little site search could help.&lt;/li&gt;
+&lt;li&gt;Polish the publication process, especially around drafts and image uploads. At the moment, it&amp;rsquo;s quite an intensive manual process to create and upload images and galleries. Especially for my triathlon site where I sometimes have 40 photos attached to a post, all with their thumbnail versions. Hopefully I&amp;rsquo;ll come around to do a little plugin to help with image resizing, gallery generation, and upload to S3 / Cloudfront during the publication process through an extension to my Rake tasks.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;Not for everyone&lt;/h2&gt;
+
+&lt;p&gt;This is a nerd publishing platform. There is a lot to set up initially, and despite the &lt;a href=&quot;http://jekyllbootstrap.com/&quot;&gt;best efforts of some&lt;/a&gt;, there are no &amp;ldquo;Jekyll for dummies&amp;rdquo; guides. You must know your way around code, around ruby, around your terminal and around git and Github. At a minimum.&lt;/p&gt;
+
+&lt;p&gt;But none of this is an issue for me: I&amp;rsquo;m a nerd, and I love it! It&amp;rsquo;s small, and I&amp;rsquo;m in control of everything locally, on my computer. The plugins I now use are pretty much all self-built, and the only thing that could go wrong in the future is my ruby version clashing with an old Jekyll install.&lt;/p&gt;
+
+&lt;p&gt;Other than this, the site generated is static, so there&amp;rsquo;s really nothing wrong in that!&lt;/p&gt;
+</description>
+                <pubDate>Sun, 02 Mar 2014 21:12:00 +0000</pubDate>
+                <link>http://ww.ekynoxe.com/on-jekyll</link>
+                <author>hello@ekynoxe.com (Mathieu Davy)</author>
+                <guid isPermaLink="true">http://ww.ekynoxe.com/on-jekyll</guid>
+            </item>
         
             <item>
                 <title>10 years!</title>
@@ -354,21 +488,6 @@ Let&amp;#8217;s be clear here: we&amp;#8217;re &lt;strong&gt;not&lt;/strong&gt; 
                 <link>http://ww.ekynoxe.com/should-you-know-tcpip-to-work-for-a-web-company</link>
                 <author>hello@ekynoxe.com (Mathieu Davy)</author>
                 <guid isPermaLink="true">http://ww.ekynoxe.com/should-you-know-tcpip-to-work-for-a-web-company</guid>
-            </item>
-        
-            <item>
-                <title>The day one image brought my server down</title>
-                <description>&lt;p&gt;During the viral expansion of the &amp;#8220;Richmond news paper editorial fiasco&amp;#8221;, I submitted &lt;a href=&quot;http://road.cc/content/forum/65843-%E2%80%A6-only-good-cyclist-dead-one-%E2%80%A6%E2%80%9D-%E2%80%93-editor-richmond-magazine-%E2%80%93-september-issue&quot; title=&quot;“… the only good cyclist is a dead one …” – editor of the richmond magazine – september issue&quot;&gt;a post on the road.cc forum&lt;/a&gt;. In it, I had added an image linked straight from my server&amp;#8230; What a great idea! Linking one of the most read cycling forum in the UK to my own domain! Lots of hits! &amp;#8230; yeah, just that.&lt;/p&gt;
-
-&lt;p class=&quot;attachement&quot;&gt;&lt;span&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2012-09-15-the-day-one-image-brought-my-server-down/one_image_host_down.png&quot; alt=&quot;One image on road.cc...&quot;/&gt;&lt;/span&gt;&lt;/p&gt;
-
-
-&lt;p&gt;I definitely need to do some memory tweaking there, because that single image, requested by the road.cc page views, brought my server to its knees. Not &amp;#8211; good.&lt;/p&gt;
-</description>
-                <pubDate>Sat, 15 Sep 2012 00:00:00 +0100</pubDate>
-                <link>http://ww.ekynoxe.com/the-day-one-image-brought-my-server-down</link>
-                <author>hello@ekynoxe.com (Mathieu Davy)</author>
-                <guid isPermaLink="true">http://ww.ekynoxe.com/the-day-one-image-brought-my-server-down</guid>
             </item>
         
     </channel>

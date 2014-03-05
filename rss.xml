@@ -6,8 +6,8 @@
         <link>http://ww.ekynoxe.com</link>
         <atom:link href="http://ww.ekynoxe.com/feed.xml" rel="self" type="application/rss+xml" />
         <language>en-gb</language>
-        <pubDate>Sun, 02 Mar 2014 19:27:31 +0000</pubDate>
-        <lastBuildDate>Sun, 02 Mar 2014 19:27:31 +0000</lastBuildDate>
+        <pubDate>Wed, 05 Mar 2014 21:05:29 +0000</pubDate>
+        <lastBuildDate>Wed, 05 Mar 2014 21:05:29 +0000</lastBuildDate>
         
             <item>
                 <title>On Jekyll</title>
@@ -65,7 +65,7 @@ It also means a much faster website to serve to your clients.&lt;/p&gt;
 
 &lt;p&gt;I started mine from &lt;a href=&quot;http://nefariousdesigns.co.uk/&quot;&gt;Tim&amp;rsquo;s&lt;/a&gt; &lt;a href=&quot;https://github.com/nefarioustim/kitchen&quot;&gt;&amp;ldquo;kitchen&amp;rdquo; project&lt;/a&gt;, and the configuration+Rakefile already in there was a godsend to quickly get to speed. I have since added a lot to it and made it mine, but some utilities like the Rakefile haven&amp;rsquo;t changed much. You can also find &lt;a href=&quot;https://github.com/ekynoxe/ekynoxe.com&quot;&gt;the source of this very website on Github&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;If you want a migration guide, you can do like I did: follow the excellent one &lt;a href=&quot;http://paulstamatiou.com/how-to-Wordpress-to-jekyll/&quot;&gt;written by Paul Stamatiou&lt;/a&gt; and discard what you don&amp;rsquo;t need. I don&amp;rsquo;t have a special host other than Github pages, so I didn&amp;rsquo;t even look at the Apache stuff, and although my images are on S3+Cloudfront, I haven&amp;rsquo;t gone around automating the deployment process yet. The same goes for comments (more on that further), or special posts types.&lt;/p&gt;
+&lt;p&gt;If you want a migration guide, you can do like I did: follow the excellent one &lt;a href=&quot;http://paulstamatiou.com/how-to-wordpress-to-jekyll/&quot;&gt;written by Paul Stamatiou&lt;/a&gt; and discard what you don&amp;rsquo;t need. I don&amp;rsquo;t have a special host other than Github pages, so I didn&amp;rsquo;t even look at the Apache stuff, and although my images are on S3+Cloudfront, I haven&amp;rsquo;t gone around automating the deployment process yet. The same goes for comments (more on that further), or special posts types.&lt;/p&gt;
 
 &lt;p&gt;The great thing about Jekyll is that it can be as simple or as complex as you want. As Paul mentions, beware of generation time for large sites, but do apply your own sauce to what you do.&lt;/p&gt;
 

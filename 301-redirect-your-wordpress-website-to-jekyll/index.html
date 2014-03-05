@@ -10,7 +10,7 @@
 
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <title>jekyll - Ekynoxe - Web development in London</title>
+        <title>301 redirect your Wordpress website to Jekyll - Ekynoxe - Web development in London</title>
         <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
         
 
@@ -88,77 +88,138 @@
 
 <div id="page">
     <div class="content">
-<section>
-    <header>
-        <h1 class="category">jekyll</h1>
-    </header>
 
-    
+    <section>
         <article>
-    <header>
-        <time datetime="2014-03-05">March 05, 2014</time>
-        <h1><a href="/301-redirect-your-wordpress-website-to-jekyll" title="301 redirect your Wordpress website to Jekyll">301 redirect your Wordpress website to Jekyll</a></h1>
-    </header>
+            <header>
+                <time datetime="2014-03-05">March 05, 2014</time>
+                <h1>301 redirect your Wordpress website to Jekyll</h1>
+            </header>
 
-    
-        <p>If you&rsquo;re migrating a Wordpress install to Jekyll, and changing your URLs structure at the same time, you&rsquo;ll need to generate redirects for your old URLs.</p>
-
-
-
+            <p>If you&rsquo;re migrating a Wordpress install to Jekyll, and changing your URLs structure at the same time, you&rsquo;ll need to generate redirects for your old URLs.</p>
 
 <p class="attachement"><span><img src="http://cdn.ekynoxe.com/content/2014-03-05-301-redirect-your-wordpress-website-to-jekyll/301.png" alt="301 permanent redirect" /></span></p>
 
 
 
 
+<!--more-->
 
-        <a class="button more" href="/301-redirect-your-wordpress-website-to-jekyll" title="read more">read more</a>
+
+<p>Here&rsquo;s a plugin that does that for you: give it the source and destination domains, and when you generate your Jekyll website, it creates a file pre-formatted with all you need to migrate your old URLs.</p>
+
+<p>Simply drop the result in the .htaccess of an Apache install and you&rsquo;re good to go.</p>
+
+<p>At the time of writing, this plugin only supports one source URL scheme, and one destination scheme:
+The source URLs must be formatted as <strong><olddomain>/year/month/day/post-slug</strong>, while the destination will be<strong><newdomain>/post-slug</strong></p>
+
+<p>The configuration options are directly inside the code and speak for themselves. You might not need to set a value at all for the source domain, but it&rsquo;s there if you need it.</p>
+
+<pre><code>@@sourceDomain = ""
+@@targetDomain = "http://www.ekynoxe.com"
+@@RedirectsFileName = "htaccess_redirects"
+</code></pre>
+
+
+<p>Here&rsquo;s a sample of what it generated for my own site:</p>
+
+<pre><code>...
+RedirectMath 301 /2010/08/09/mastermind/? http://www.ekynoxe.com/mastermind/
+RedirectMath 301 /2010/09/01/what-really-motivates-us/? http://www.ekynoxe.com/what-really-motivates-us/
+RedirectMath 301 /2010/09/06/extending-contact-form-7/? http://www.ekynoxe.com/extending-contact-form-7/
+RedirectMath 301 /2010/09/12/create-a-deep-space-background-in-photoshop/? http://www.ekynoxe.com/create-a-deep-space-background-in-photoshop/
+RedirectMath 301 /2010/10/24/this-is-it/? http://www.ekynoxe.com/this-is-it/
+...
+</code></pre>
+
+
+<p>The source code is on Github in the <a href="https://github.com/ekynoxe/JekyllRedirectsGenerator">Jekyll 301 Redirects Generator</a></p>
+
+<p>If you prefer copy / paste, here it is too:</p>
+
+<pre><code># encoding: utf-8
+#
+# Jekyll 301 Redirects Generator plugin for Wordpress site migration
+# http://www.ekynoxe.com/
+# Version: 0.0.1 (2014-03-04)
+#
+# Copyright (c) 2014 Mathieu Davy - ekynoxe - http://ekynoxe.com/
+# Licensed under the MIT license
+# (http://www.opensource.org/licenses/mit-license.php)
+#
+# This plugin creates a list of 301 redirects from old Wordpress urls to new ones.
+# It currently only supports one source url structure
+#   and one target structure:
+#
+#   source:    <olddomain>/year/month/day/postname
+#
+#   target:    <newdomain>/postname
+#
+module Jekyll
+
+    # Sub-class Jekyll::StaticFile to allow recovery from unimportant exception
+    #   when writing the redirects file.
+    # I don't like this but that seems to be the only way to get around Jekyll
+    #   StaticFile class using "cp" instead of "rename"
+    # Found on the SiteMap Generator at
+    #   https://github.com/recurser/jekyll-plugins/blob/master/generate_sitemap.rb
+    class RedirectsFile < StaticFile
+        def write(dest)
+            super(dest) rescue ArgumentError
+            true
+        end
+    end
+
+    class RedirectsGenerator < Generator
+        safe true
+        priority :low
+
+        @@sourceDomain = ""
+        @@targetDomain = "http://www.ekynoxe.com"
+        @@RedirectsFileName = "htaccess_redirects"
+
+        def generate(site)
+            mappedUrls = []
+
+            site.posts.each do |post|
+                post_name = post.name.gsub(/\.md$/, "")
+                url_parts = post_name.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})-(.+)/i)
+
+                mappedUrls << "RedirectMath 301 " + File.join(@@sourceDomain, url_parts[1], url_parts[2], url_parts[3], url_parts[4]) + "/? " + File.join(@@targetDomain, url_parts[4]) + "/"
+            end
+
+            site_folder = site.config['destination']
+            unless File.directory?(site_folder)
+                p = Pathname.new(site_folder)
+                p.mkdir
+            end
+
+            File.open(File.join( site_folder, @@RedirectsFileName ), 'w') do |f|
+                mappedUrls.each do |line|
+                    f.write line + "\n"
+                end
+
+                f.close
+            end
+
+            site.static_files << Jekyll::RedirectsFile.new(site, site.dest, '/', @@RedirectsFileName)
+        end
+    end
+end
+</code></pre>
+
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/on-jekyll" title="On Jekyll">previous </a>
+
     
-
-</article>
-    
-        <article>
-    <header>
-        <time datetime="2014-03-02">March 02, 2014</time>
-        <h1><a href="/on-jekyll" title="On Jekyll">On Jekyll</a></h1>
-    </header>
+    </div>
 
     
-        <p>That&rsquo;s it! At long last, I&rsquo;ve migrated my personal sites away from Wordpress. My blog and websites have been in need of a design overhaul for a long time, and as I was growing tired of the incessant and ever larger updates required by Wordpress and its plugins, I decided to switch to a static site generator.</p>
-
-
-
-
-<p>Exit Wordpress, enters Jekyll.</p>
-
-
-
-
-<p class="attachement"><span><img src="http://cdn.ekynoxe.com/content/2014-03-02-on-jekyll/wp_to_jkl.jpg" alt="Wordpress to Jekyll" /></span></p>
-
-
-
-
-
-        <a class="button more" href="/on-jekyll" title="read more">read more</a>
-    
-
-</article>
-    
-</section>
-
-
-
-<section class="tag_list">
-    <header>
-        <h1>Categories</h1>
-    </header>
-
-    <ul>
-        <li><a href="/categories/apache/" title="apache">apache</a></li> <li><a href="/categories/authlogic/" title="authlogic">authlogic</a></li> <li><a href="/categories/betfair/" title="betfair">betfair</a></li> <li><a href="/categories/code/" title="code">code</a></li> <li><a href="/categories/conferences/" title="conferences">conferences</a></li> <li><a href="/categories/css/" title="css">css</a></li> <li><a href="/categories/cycling/" title="cycling">cycling</a></li> <li><a href="/categories/design/" title="design">design</a></li> <li><a href="/categories/development/" title="development">development</a></li> <li><a href="/categories/games/" title="games">games</a></li> <li><a href="/categories/git/" title="git">git</a></li> <li><a href="/categories/identity/" title="identity">identity</a></li> <li><a href="/categories/javascript/" title="javascript">javascript</a></li> <li><a href="/categories/jekyll/" title="jekyll">jekyll</a></li> <li><a href="/categories/link/" title="link">link</a></li> <li><a href="/categories/mobile/" title="mobile">mobile</a></li> <li><a href="/categories/orange/" title="orange">orange</a></li> <li><a href="/categories/photoshop/" title="photoshop">photoshop</a></li> <li><a href="/categories/ruby/" title="ruby">ruby</a></li> <li><a href="/categories/shopify/" title="shopify">shopify</a></li> <li><a href="/categories/solex/" title="solex">solex</a></li> <li><a href="/categories/testing/" title="testing">testing</a></li> <li><a href="/categories/thoughts/" title="thoughts">thoughts</a></li> <li><a href="/categories/tools/" title="tools">tools</a></li> <li><a href="/categories/travel/" title="travel">travel</a></li> <li><a href="/categories/ux/" title="ux">ux</a></li> <li><a href="/categories/wordpress/" title="wordpress">wordpress</a></li> <li><a href="/categories/work/" title="work">work</a></li> <li><a href="/categories/work project/" title="work project">work project</a></li> <li><a href="/categories/zend/" title="zend">zend</a></li> 
-    </ul>
-</section>
-
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=301 redirect your Wordpress website to Jekyll">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
 </div>
 </div>
 

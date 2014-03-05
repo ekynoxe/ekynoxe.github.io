@@ -6,8 +6,129 @@
         <link>http://ww.ekynoxe.com</link>
         <atom:link href="http://ww.ekynoxe.com/feed.xml" rel="self" type="application/rss+xml" />
         <language>en-gb</language>
-        <pubDate>Wed, 05 Mar 2014 21:05:29 +0000</pubDate>
-        <lastBuildDate>Wed, 05 Mar 2014 21:05:29 +0000</lastBuildDate>
+        <pubDate>Wed, 05 Mar 2014 21:54:00 +0000</pubDate>
+        <lastBuildDate>Wed, 05 Mar 2014 21:54:00 +0000</lastBuildDate>
+        
+            <item>
+                <title>301 redirect your Wordpress website to Jekyll</title>
+                <description>&lt;p&gt;If you&amp;rsquo;re migrating a Wordpress install to Jekyll, and changing your URLs structure at the same time, you&amp;rsquo;ll need to generate redirects for your old URLs.&lt;/p&gt;
+
+&lt;p class=&quot;attachement&quot;&gt;&lt;span&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2014-03-05-301-redirect-your-wordpress-website-to-jekyll/301.png&quot; alt=&quot;301 permanent redirect&quot; /&gt;&lt;/span&gt;&lt;/p&gt;
+
+
+
+
+&lt;!--more--&gt;
+
+
+&lt;p&gt;Here&amp;rsquo;s a plugin that does that for you: give it the source and destination domains, and when you generate your Jekyll website, it creates a file pre-formatted with all you need to migrate your old URLs.&lt;/p&gt;
+
+&lt;p&gt;Simply drop the result in the .htaccess of an Apache install and you&amp;rsquo;re good to go.&lt;/p&gt;
+
+&lt;p&gt;At the time of writing, this plugin only supports one source URL scheme, and one destination scheme:
+The source URLs must be formatted as &lt;strong&gt;&lt;olddomain&gt;/year/month/day/post-slug&lt;/strong&gt;, while the destination will be&lt;strong&gt;&lt;newdomain&gt;/post-slug&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The configuration options are directly inside the code and speak for themselves. You might not need to set a value at all for the source domain, but it&amp;rsquo;s there if you need it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@@sourceDomain = &quot;&quot;
+@@targetDomain = &quot;http://www.ekynoxe.com&quot;
+@@RedirectsFileName = &quot;htaccess_redirects&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;Here&amp;rsquo;s a sample of what it generated for my own site:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+RedirectMath 301 /2010/08/09/mastermind/? http://www.ekynoxe.com/mastermind/
+RedirectMath 301 /2010/09/01/what-really-motivates-us/? http://www.ekynoxe.com/what-really-motivates-us/
+RedirectMath 301 /2010/09/06/extending-contact-form-7/? http://www.ekynoxe.com/extending-contact-form-7/
+RedirectMath 301 /2010/09/12/create-a-deep-space-background-in-photoshop/? http://www.ekynoxe.com/create-a-deep-space-background-in-photoshop/
+RedirectMath 301 /2010/10/24/this-is-it/? http://www.ekynoxe.com/this-is-it/
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The source code is on Github in the &lt;a href=&quot;https://github.com/ekynoxe/JekyllRedirectsGenerator&quot;&gt;Jekyll 301 Redirects Generator&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you prefer copy / paste, here it is too:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# encoding: utf-8
+#
+# Jekyll 301 Redirects Generator plugin for Wordpress site migration
+# http://www.ekynoxe.com/
+# Version: 0.0.1 (2014-03-04)
+#
+# Copyright (c) 2014 Mathieu Davy - ekynoxe - http://ekynoxe.com/
+# Licensed under the MIT license
+# (http://www.opensource.org/licenses/mit-license.php)
+#
+# This plugin creates a list of 301 redirects from old Wordpress urls to new ones.
+# It currently only supports one source url structure
+#   and one target structure:
+#
+#   source:    &lt;olddomain&gt;/year/month/day/postname
+#
+#   target:    &lt;newdomain&gt;/postname
+#
+module Jekyll
+
+    # Sub-class Jekyll::StaticFile to allow recovery from unimportant exception
+    #   when writing the redirects file.
+    # I don't like this but that seems to be the only way to get around Jekyll
+    #   StaticFile class using &quot;cp&quot; instead of &quot;rename&quot;
+    # Found on the SiteMap Generator at
+    #   https://github.com/recurser/jekyll-plugins/blob/master/generate_sitemap.rb
+    class RedirectsFile &lt; StaticFile
+        def write(dest)
+            super(dest) rescue ArgumentError
+            true
+        end
+    end
+
+    class RedirectsGenerator &lt; Generator
+        safe true
+        priority :low
+
+        @@sourceDomain = &quot;&quot;
+        @@targetDomain = &quot;http://www.ekynoxe.com&quot;
+        @@RedirectsFileName = &quot;htaccess_redirects&quot;
+
+        def generate(site)
+            mappedUrls = []
+
+            site.posts.each do |post|
+                post_name = post.name.gsub(/\.md$/, &quot;&quot;)
+                url_parts = post_name.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})-(.+)/i)
+
+                mappedUrls &lt;&lt; &quot;RedirectMath 301 &quot; + File.join(@@sourceDomain, url_parts[1], url_parts[2], url_parts[3], url_parts[4]) + &quot;/? &quot; + File.join(@@targetDomain, url_parts[4]) + &quot;/&quot;
+            end
+
+            site_folder = site.config['destination']
+            unless File.directory?(site_folder)
+                p = Pathname.new(site_folder)
+                p.mkdir
+            end
+
+            File.open(File.join( site_folder, @@RedirectsFileName ), 'w') do |f|
+                mappedUrls.each do |line|
+                    f.write line + &quot;\n&quot;
+                end
+
+                f.close
+            end
+
+            site.static_files &lt;&lt; Jekyll::RedirectsFile.new(site, site.dest, '/', @@RedirectsFileName)
+        end
+    end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+                <pubDate>Wed, 05 Mar 2014 21:49:00 +0000</pubDate>
+                <link>http://ww.ekynoxe.com/301-redirect-your-wordpress-website-to-jekyll</link>
+                <author>hello@ekynoxe.com (Mathieu Davy)</author>
+                <guid isPermaLink="true">http://ww.ekynoxe.com/301-redirect-your-wordpress-website-to-jekyll</guid>
+            </item>
         
             <item>
                 <title>On Jekyll</title>
@@ -455,39 +576,6 @@ Please repost and discuss! I&amp;#8217;m sure there will be plenty of different 
                 <link>http://ww.ekynoxe.com/ideas-for-twickenham-city-center</link>
                 <author>hello@ekynoxe.com (Mathieu Davy)</author>
                 <guid isPermaLink="true">http://ww.ekynoxe.com/ideas-for-twickenham-city-center</guid>
-            </item>
-        
-            <item>
-                <title>Should you know TCP/IP to work for a web company?</title>
-                <description>&lt;p&gt;An interesting discussion (argument?) popped in my tweets yesterday in the form of TCP/IP knowledge depth to be able to work at a web company.&lt;/p&gt;
-
-&lt;p class=&quot;attachement&quot;&gt;&lt;span&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2012-09-25-should-you-know-tcpip-to-work-for-a-web-company/tweetshot.jpg&quot; alt=&quot;The tweet that prompted it all&quot;/&gt;&lt;/span&gt;&lt;/p&gt;
-
-
-&lt;p&gt;That quickly prompted quite a few replies from developers and techs leads of different levels and knowledge, including myself, but none of us asked the question: &amp;#8220;for which role?&amp;#8221;&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-
-&lt;p&gt;There are a lot of different roles at a web company, and if we exclude the obvious non techies ones (I doubt the receptionist gives a damn about MTU and error control), we can still argue about the depth of network knowledge required to occupy a technical role.
-Let&amp;#8217;s be clear here: we&amp;#8217;re &lt;strong&gt;not&lt;/strong&gt; talking about connecting your laptop to your corporate wifi network, but about network protocols and how they work.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The pure front-end developer: &lt;/strong&gt; I&amp;#8217;d argue you only need some very small basics, if any, about network protocols to do an awesome job without any problem. I hope you know what an IP address is, and that&amp;#8217;s possibly the only thing you&amp;#8217;ll need. If you don&amp;#8217;t, dig it up, but don&amp;#8217;t learn the whole CCNA syllabus. No need. Knowing HTTP, on the other hand, is not an option these days, even for &amp;#8220;pure front-enders&amp;#8221; who&amp;#8217;ll most likely have to do something with asynchronous javaScript calls at some point or another.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The all rounder&lt;/strong&gt;: If, like me, you&amp;#8217;re one of those, doing some front end and backend code, you&amp;#8217;ll probably want to know a bit more about what rules data transfers across networks. Having a little knowledge about network protocols, what they generally do and how to ping/trace stuff is a good thing. But I am really not convinced that knowing the inner workings TCP/IP should be a requirement to land you a job. Hands up all rounders who have had to dig in TCP retransmission timeouts or the size of IP datagrams because some packets were being dropped on &amp;#8220;the line&amp;#8221;? Yeah&amp;#8230; I thought so. Probably not many, and the ones who raised their hands either do a networks engineer&amp;#8217;s job, or, like me, did some network studies before falling into development.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The back-ender:&lt;/strong&gt; It&amp;#8217;s probably a very good asset to have, especially if you work at a web company dealing with large volumes of users, requests, page loads and transactions. Knowing it will probably help a lot in optimisation of data transfers an server communications. I&amp;#8217;d argue here that it is a requirement for you to know where things happen on the network stack. You won&amp;#8217;t need it every day in your job, but you&amp;#8217;ll have an extra weapon in your arsenal in case things get nasty in those lower layers. Having said that, if you don&amp;#8217;t work on networks systems, I&amp;#8217;m pretty sure you can still do an excellent job without the complete knowledge of how IP re-assembles packets or how TCP works out how to retransmis the ones gone astray&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;Now if you&amp;#8217;re interviewing for a network or systems engineer role, then you should not only know what TCP/IP is, but know its inner workings and its quirks. You should know how to trace errors in packets and be able to identify why some retransmission occurs on the networks you&amp;#8217;ll be managing. At this level, basics aren&amp;#8217;t enough anymore, but this is valid in any IT networks department, regardless of the company.&lt;/p&gt;
-
-&lt;p&gt;As with everything, it&amp;#8217;s all a matter of perspective (and remember I&amp;#8217;m more an all-rounder with a strong preference on front-end development), but I&amp;#8217;d argue you don&amp;#8217;t need a very deep understanding of the inner workings TCP/IP and how it works to &amp;#8220;work at a web company&amp;#8221;.&lt;/p&gt;
-
-&lt;p&gt;What&amp;#8217;s &lt;strong&gt;your&lt;/strong&gt; view?&lt;/p&gt;
-</description>
-                <pubDate>Tue, 25 Sep 2012 00:00:00 +0100</pubDate>
-                <link>http://ww.ekynoxe.com/should-you-know-tcpip-to-work-for-a-web-company</link>
-                <author>hello@ekynoxe.com (Mathieu Davy)</author>
-                <guid isPermaLink="true">http://ww.ekynoxe.com/should-you-know-tcpip-to-work-for-a-web-company</guid>
             </item>
         
     </channel>

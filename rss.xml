@@ -6,8 +6,68 @@
         <link>http://ww.ekynoxe.com</link>
         <atom:link href="http://ww.ekynoxe.com/feed.xml" rel="self" type="application/rss+xml" />
         <language>en-gb</language>
-        <pubDate>Wed, 05 Mar 2014 21:54:00 +0000</pubDate>
-        <lastBuildDate>Wed, 05 Mar 2014 21:54:00 +0000</lastBuildDate>
+        <pubDate>Tue, 18 Mar 2014 21:44:13 +0000</pubDate>
+        <lastBuildDate>Tue, 18 Mar 2014 21:44:13 +0000</lastBuildDate>
+        
+            <item>
+                <title>Migrating comments and the quest for a lightweight solution</title>
+                <description>&lt;p&gt;When I &lt;a href=&quot;/on-jekyll/&quot;&gt;migrated to jekyll&lt;/a&gt;, I also wanted to migrate all my comments. My site doesn&amp;rsquo;t have that many of them, so I thought it should have been a doddle to do it, and I was initially firmly set on using &lt;a href=&quot;http://disqus.com/&quot;&gt;Disqus&lt;/a&gt;. It seemed simple, the embedded code interface didn&amp;rsquo;t look too bad within my new website&amp;rsquo;s design, and I didn&amp;rsquo;t care that much about the fact that it works only with javascript.&lt;/p&gt;
+
+&lt;p class=&quot;attachement&quot;&gt;&lt;span&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2014-03-18-migrating-comments-and-the-quest-for-a-lightweight-solution/comment.png&quot; alt=&quot;comments&quot; /&gt;&lt;/span&gt;&lt;/p&gt;
+
+
+
+
+&lt;!--more--&gt;
+
+
+&lt;p&gt;Exporting my comments from Wordpress was very easy through WXR export file, and uploading them to Disqus was equally easy in the first instance.&lt;/p&gt;
+
+&lt;p&gt;However, I wasn&amp;rsquo;t just moving my comments from Wordpress to Disqus under the same domain, but also changing said domain. And that&amp;rsquo;s where the shine started to fade.&lt;/p&gt;
+
+&lt;p&gt;There is a domain migration tool provided by Disqus, but no matter how much I tried to migrate comments to the new URLs, I couldn&amp;rsquo;t make it work.
+Maybe I misunderstood something about the process, but the lack of feedback when creating a URL migration and the lack of documentation around the process is appalling at best.&lt;/p&gt;
+
+&lt;p&gt;The basic Disqus interface is probably OK as long as you stay in the confines of the bog-standard pathway, but for anything else, I found it to be very confusing. Very poor instructions, complete lack of feedback, and zero other on-line resources. The experience wasn&amp;rsquo;t great. I even tried to contact their &amp;ldquo;customer support&amp;rdquo; a few times, but there again I didn&amp;rsquo;t receive even the acknowledgement that my request had been received. I still haven&amp;rsquo;t received anything to this day.&lt;/p&gt;
+
+&lt;p&gt;Over 5 days of experimentation, I tried to migrate the comments to domains on my local machine with a host file entry and on a real, live, website under a development domain of mine, just in case Disqus' back-end needed to verify that this domain worked somehow. I repeated the whole import / migration a few times, but nothing at all was indicating that I was going in the right direction.&lt;/p&gt;
+
+&lt;p&gt;Not a speck of light on anything was visible. So I&amp;rsquo;ve giving up on Disqus. If you&amp;rsquo;re the standard user, you might be OK. If you have other needs: buzz off&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I had a look at a few other systems like &lt;a href=&quot;https://moot.it/&quot;&gt;Moot.it&lt;/a&gt;, &lt;a href=&quot;http://web.livefyre.com/&quot;&gt;Livefyre&lt;/a&gt;, and some others, but they either are too complex and expensive for what I need, or have no obvious support to import anything.&lt;/p&gt;
+
+&lt;p&gt;Given the waste of time, I have therefore pulled the plug entirely on using any existing third party commenting system at the moment. I think I&amp;rsquo;ve even come around to refusing to give the data of my website to a third party at all anyway.&lt;/p&gt;
+
+&lt;p&gt;In time, I&amp;rsquo;ll create my very own commenting system, keeping ownership of my comments, and hopefully share that code with everyone for a self hosted solution that one can control entirely. It may be seen as reinventing the wheel, but I&amp;rsquo;ll disagree. I won&amp;rsquo;t create another Disqus, I&amp;rsquo;ll create a solution for geeks who don&amp;rsquo;t mind looking at a little bit of code, but mind a lot about where their content goes.&lt;/p&gt;
+
+&lt;p&gt;The basic requirements are pretty simple:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A secure API for sending/fetching comments. No need for the posting side of things to even work through an interface&lt;/li&gt;
+&lt;li&gt;An administration interface to manage comments, edit, delete, spam them etc&amp;hellip; (I don&amp;rsquo;t see myself doing it all command line!)&lt;/li&gt;
+&lt;li&gt;Comment reply notifications&lt;/li&gt;
+&lt;li&gt;It must be always on: no &amp;ldquo;Heroku 5 seconds spin up of death scenario&amp;hellip;&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;Configuration options per post/page to accept/block or enable/disable comments&lt;/li&gt;
+&lt;li&gt;Spam detection will be a must, and probably the trickiest one. But since a self hosted WP installation does it, there must be a way to replicate this with an Akismet key.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;Things I don&amp;rsquo;t need or care for&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Avatars&lt;/li&gt;
+&lt;li&gt;Discussions. I want this solution to be just comments, and replies to comments. Other systems do discussions, and I&amp;rsquo;ll happily leave it to them!&lt;/li&gt;
+&lt;li&gt;Fancy mark-up. Everything will start by being stored as escaped HTML. Then it will be up to clients to use the correct parsers/highlighters. Whether they are JavaScript or ruby, I won&amp;rsquo;t care.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;In the mean time, you can send me an email with your comments, and I&amp;rsquo;ll add them to the statically hosted ones on this site.&lt;/p&gt;
+</description>
+                <pubDate>Tue, 18 Mar 2014 21:43:00 +0000</pubDate>
+                <link>http://ww.ekynoxe.com/migrating-comments-and-the-quest-for-a-lightweight-solution</link>
+                <author>hello@ekynoxe.com (Mathieu Davy)</author>
+                <guid isPermaLink="true">http://ww.ekynoxe.com/migrating-comments-and-the-quest-for-a-lightweight-solution</guid>
+            </item>
         
             <item>
                 <title>301 redirect your Wordpress website to Jekyll</title>
@@ -560,22 +620,6 @@ Please help spread the word!&lt;/p&gt;
                 <link>http://ww.ekynoxe.com/instants-tisses-my-sisters-business-has-now-launched</link>
                 <author>hello@ekynoxe.com (Mathieu Davy)</author>
                 <guid isPermaLink="true">http://ww.ekynoxe.com/instants-tisses-my-sisters-business-has-now-launched</guid>
-            </item>
-        
-            <item>
-                <title>Ideas for Twickenham city center</title>
-                <description>&lt;p&gt;Some fantastic ideas for the renewal of Twickenham city center.
-Please repost and discuss! I&amp;#8217;m sure there will be plenty of different views, but let&amp;#8217;s all be constructive.&lt;/p&gt;
-
-&lt;p&gt;&lt;a title=&quot;Love Twickenham, Go Dutch&quot; href=&quot;http://pedestrianiselondon.tumblr.com/post/34477053931/love-twickenham-go-dutch&quot;&gt;http://pedestrianiselondon.tumblr.com/post/34477053931/love-twickenham-go-dutch&lt;/a&gt;&lt;/p&gt;
-
-&lt;p class=&quot;attachement&quot;&gt;&lt;a href=&quot;http://pedestrianiselondon.tumblr.com/post/34477053931/love-twickenham-go-dutch&quot; title=&quot;Twickenham&quot;&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2012-10-30-ideas-for-twickenham-city-center/twick.png&quot; alt=&quot;Twickenham&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-</description>
-                <pubDate>Tue, 30 Oct 2012 00:00:00 +0000</pubDate>
-                <link>http://ww.ekynoxe.com/ideas-for-twickenham-city-center</link>
-                <author>hello@ekynoxe.com (Mathieu Davy)</author>
-                <guid isPermaLink="true">http://ww.ekynoxe.com/ideas-for-twickenham-city-center</guid>
             </item>
         
     </channel>

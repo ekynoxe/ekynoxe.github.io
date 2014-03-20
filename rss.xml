@@ -6,8 +6,8 @@
         <link>http://ww.ekynoxe.com</link>
         <atom:link href="http://ww.ekynoxe.com/feed.xml" rel="self" type="application/rss+xml" />
         <language>en-gb</language>
-        <pubDate>Tue, 18 Mar 2014 21:44:13 +0000</pubDate>
-        <lastBuildDate>Tue, 18 Mar 2014 21:44:13 +0000</lastBuildDate>
+        <pubDate>Thu, 20 Mar 2014 22:23:46 +0000</pubDate>
+        <lastBuildDate>Thu, 20 Mar 2014 22:23:46 +0000</lastBuildDate>
         
             <item>
                 <title>Migrating comments and the quest for a lightweight solution</title>
@@ -602,24 +602,25 @@ Please help spread the word!&lt;/p&gt;
             </item>
         
             <item>
-                <title>Instants Tissés, my sister&amp;#8217;s business, has now launched!</title>
-                <description>&lt;p&gt;Several months in the making to sort out all the details and go around the inevitable changes of mind that my sister always goes through, her business online store, &lt;a href=&quot;http://www.instantstisses.com/&quot; title=&quot;Instants Tissés&quot;&gt;Instants Tissés&lt;/a&gt;, is now open!&lt;/p&gt;
+                <title>Ellen Physiotherapy</title>
+                <description>&lt;p&gt;Ellen needed a simple yet effective single page layout to launch her business as as self employed physiotherapist in the South West London area.&lt;/p&gt;
 
-&lt;p class=&quot;attachement&quot;&gt;&lt;a href=&quot;http://www.instantstisses.com/&quot; title=&quot;Instants Tissés&quot;&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2013-03-03-instants-tisses-my-sisters-business-has-now-launched/logo_IT.png&quot; alt=&quot;Instants Tissés&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;She had some initial ideas so this made the design phase quite quick. The logo was done from her original ideas that I have adapted.&lt;/p&gt;
+
+&lt;p class=&quot;attachement&quot;&gt;&lt;a href=&quot;http://www.physioellen.co.uk/&quot; title=&quot;Ellen Physiotherapy&quot;&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2013-05-01-ellen-physiotherapy/logo_ellen.png&quot; alt=&quot;Ellen Physiotherapy&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 
-&lt;p&gt;&amp;#8220;Instants Tissés&amp;#8221; is French for &amp;#8220;Woven instants&amp;#8221;, and her business is all about special occasion cards and paper supports with a twist: fabric! Marrying high quality printed paper and light fabrics should bring an extra personal touch to your special occasions. At the moment she has an extensive collection of &lt;a href=&quot;https://instants-tisses.myshopify.com/collections/mariage-pacs&quot; title=&quot;Instants Tissés wedding section&quot;&gt;wedding&lt;/a&gt; invitations, menus, dinner table plans and cards, but a &lt;a href=&quot;https://instants-tisses.myshopify.com/collections/naissance&quot; title=&quot;Instants Tissés birth section&quot;&gt;birth&lt;/a&gt; section is coming as well.&lt;/p&gt;
+&lt;p&gt;We have also created business cards to go with the website using the wonderful &lt;a href=&quot;http://uk.moo.com/products/luxe/business-cards.html&quot;&gt;Moo luxe cards&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;And if you don&amp;#8217;t find anything that really tickles your fancy in the large existing collection, there is also a &amp;#8220;&lt;a href=&quot;http://www.instantstisses.com/pages/sur-mesure&quot; title=&quot;Instants Tissés custom section&quot;&gt;custom&lt;/a&gt;&amp;#8221; service that should let you get a quote on your ideal, personalised support for your special occasions.&lt;/p&gt;
+&lt;p class=&quot;attachement&quot;&gt;&lt;img src=&quot;http://cdn.ekynoxe.com/content/2013-05-01-ellen-physiotherapy/business_cards.png&quot; alt=&quot;Ellen Physiotherapy business cards&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Do pay her store a visit, use google translate if you don&amp;#8217;t understand French, and do buy some of her stuff! She&amp;#8217;s getting started and needs all the support she can get!&lt;/p&gt;
 
-&lt;p&gt;For the techies of you who read this, her site has been done using the excellent &lt;a href=&quot;http://shopify.com&quot; title=&quot;Shopify&quot;&gt;Shopify&lt;/a&gt; with a completely custom theme.&lt;/p&gt;
+&lt;p&gt;As there was no requirement to quickly update the site, I simply used a pure ruby application using sinatra. This makes this small site very fast and as her partner, easy to update for me!&lt;/p&gt;
 </description>
-                <pubDate>Sun, 03 Mar 2013 00:00:00 +0000</pubDate>
-                <link>http://ww.ekynoxe.com/instants-tisses-my-sisters-business-has-now-launched</link>
+                <pubDate>Wed, 01 May 2013 21:43:00 +0100</pubDate>
+                <link>http://ww.ekynoxe.com/ellen-physiotherapy</link>
                 <author>hello@ekynoxe.com (Mathieu Davy)</author>
-                <guid isPermaLink="true">http://ww.ekynoxe.com/instants-tisses-my-sisters-business-has-now-launched</guid>
+                <guid isPermaLink="true">http://ww.ekynoxe.com/ellen-physiotherapy</guid>
             </item>
         
     </channel>

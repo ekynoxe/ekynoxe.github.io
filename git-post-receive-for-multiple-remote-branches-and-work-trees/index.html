@@ -772,6 +772,57 @@ Matt</p>
 
     </li>
 
+    <li>
+        <h3>
+    
+        <a href="http://www.kinoli.com/" title="Jesse">Jesse</a>
+    
+        <small>Mon, 15 Sep 2014 - 20:37</small></h3>
+        <p>Great article. One problem I have, is I want all of my files to be backed up in the repo but I want to prevent certain files/directories from being checked out into the live directory. So gitignore doesn't seem to be the solution since it prevents certain directories from making it into the git backup. For instance, I have a '_db' directory where I store database backups. I want those to be registered in my git repo, but I don't want it to be accessible in my web root. Any ideas how to dot that?</p>
+
+        
+            <ul>
+
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Mon, 15 Sep 2014 - 22:47</small></h3>
+        <p>Hi Jesse,
+
+Thanks for taking the time to comment.
+
+You are right, .gitignore will only help in case you don't want to *commit* files to your repo.
+As far as I'm aware, there isn't a way to tell checkout to ignore some files, that would complicate things a lot!
+
+However, since the hook is a bash script, you're free to do whatever you want in it.
+One solution would be to use the --work-tree option to target a temporary folder, from which you would copy only what you really need to your web root:
+
+Instead of
+
+</p><pre><code>git --work-tree=/path/under/root/dir/live-site/ checkout -f $branch</code></pre><p>
+
+You could have something like:
+
+</p><pre><code>git --work-tree=/temp/path/ checkout -f $branch
+rsync -av /temp/path/ /web/root/ --exclude _db</code></pre><p>
+
+There are quite a few options to chose from. Rsync / cp / find with xargs / etc etc. Pick the one you prefer! And you're not bound to bash either, you can write your hooks in ruby perl etc as well. Whatever suits you, make those examples your own!
+
+/!\/!\ I haven't tried this code, so just make sure you know where you're going with it!</p>
+
+        
+        
+
+    </li>
+
+</ul>
+        
+
+    </li>
+
 </ul>
     </section>
     

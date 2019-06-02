@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://www.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Fix that Web Site! - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+
+<ul>
+    <li class="home"><a title="home" class="selected" href="/">HOME</a></li>
+</ul>
+
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2009-09-09">September 09, 2009</time>
+                <h1>Fix that Web Site!</h1>
+            </header>
+
+            <p>I can&#8217;t recall how many times I&#8217;ve entered a domain name in a browser, say &#8216;domain.com&#8217;, only to wait 30 seconds and get an ugly 502 Bad gateway error in return.
+The problem? Enter http://domain.com instead of http://www.domain.com and see what happens.</p>
+
+<ol>
+<li>you are served the expected website, the url stays the same</li>
+<li>you are redirected to http://www.domain.com or some other url</li>
+<li>you get a 502, Bad gateway timeout</li>
+</ol>
+
+
+<p>I don&#8217;t know if it&#8217;s laziness, lack of knowledge or simply host providers being plain rubbish, but it&#8217;s an annoying problem that can be solved extremely simply!</p>
+
+<!--more-->
+
+
+<p>Most of websites that are not configured properly often get away with it as many internet users believe that &#8216;www&#8217; is a compulsory part of any web URL.</p>
+
+<p>In fact it&#8217;s only because of an old practice of naming hosts according to the services they provide, in our case a web site, with www. FTP using ftp.domain.come etc.
+But it has nothing to do with any technical issue or any standard.
+Not many (if any) &#8216;Mr average&#8217; know this!</p>
+
+<p>One of the problems is that with the advent of new web browsers that suggest you URLs from your history, or even perform straight away an interactive search of web resources that match your typing, it is very easy to fall into the usual consumer laziness and let the browser find everything for you. That way, you get into the habit of accessing a website just by typing the domain name, without www or any other prefix, and sometimes even without the top level domain (The &#8216;.com&#8217; or other &#8216;.something&#8217;).</p>
+
+<p>I&#8217;m the first to do it and that&#8217;s why I probably end up on these poorly configured web servers from time to time.
+But I am still quite astonished to it see happen, as it can seriously lead to some misunderstanding from the average user. If I don&#8217;t know anything of internet, don&#8217;t care about &#8216;www&#8217;s, just type a domain name in my browser and get an error page, I&#8217;m not going to try very long to search for how to access that site!</p>
+
+<p>That problem has a simple solution though.</p>
+
+<p>First, if you have access to them, check your DNS records.
+This step might not be compulsory, but it won&#8217;t harm to check them anyways.
+Your domain will have an A record to point your domain name to the IP of the host of your web site:</p>
+
+<pre>
+    domain.com        A         0.0.0.0
+</pre>
+
+
+<p>You can also add either an A or a CNAME record for the www sub-domain. The syntax differs:</p>
+
+<pre>
+    domain.com            A 0.0.0.0
+    www.domain.com        A 0.0.0.0
+    www.domain.com CNAME domain.com.
+</pre>
+
+
+<p>Second, check your web server configuration that it actually is accepting requests from sub-domains and serving the proper files.
+In Apache, for example, you can set it up by adding a virtual host:</p>
+
+<pre>
+    Listen 80
+    NameVirtualHost *
+
+    &lt;VirtualHost *&gt;
+    ServerName www.domain.com
+    DocumentRoot /home/httpd/htdocs/
+    &lt;/VirtualHost>
+
+    &lt;VirtualHost *&gt;
+    ServerName domain.com
+    DocumentRoot /home/httpd/htdocs/
+    &lt;/VirtualHost&gt;
+</pre>
+
+
+<p>or using a server alias:</p>
+
+<pre>
+    Listen 80
+    NameVirtualHost *
+
+    &lt;VirtualHost *&gt;
+    ServerName domain.com
+    ServerAlias www.domain.com
+    DocumentRoot /home/httpd/htdocs/
+    &lt;/VirtualHost&gt;
+</pre>
+
+
+<p>So yes, I admit, you have to have access to the DNS entries and the configuration files of the server. But even if you don&#8217;t and it&#8217;s down to the host provider to configure the DNS and the web server files, it is very easy to set these up properly.</p>
+
+<p>Ok, again, you might argue that you could serve a different version of the site with http://domain.com and http://www.domain.com, but if you don&#8217;t and there is no redirection in place, just make sure you don&#8217;t serve a 502.</p>
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/setting-up-zend" title="setting-up Zend">previous </a>
+
+    <a class="button next" href="/zend-and-xdebug" title="Zend and Xdebug"> next</a>
+    </div>
+
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=Fix that Web Site!">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2019</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-8194968-1', 'ekynoxe.com');ga('send', 'pageview');</script>
+    </body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://www.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>WordPress wp_enque_scripts in functions.php - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+
+<ul>
+    <li class="home"><a title="home" class="selected" href="/">HOME</a></li>
+</ul>
+
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2011-08-18">August 18, 2011</time>
+                <h1>WordPress wp_enque_scripts in functions.php</h1>
+            </header>
+
+            <p>The functions.php file should be known to every wordpress theme developer, as it&#8217;s where all your custom theme code is expected to go, including the loading of special files, scripts and overriding the default, out-of-the-box wordpress functions and javascript files.</p>
+
+<p>However, there are a few things one need to remember when writing code in that file, and it&#8217;s not always easy to understand. Specifically, registering and enqueueing scripts can be a bit tricky if you don&#8217;t understand how the functions.php file is loaded.</p>
+
+<p>One of the biggest problem is understanding the scope and load/execution time of what is in that file. I&#8217;ve scratched my head a few times on it, and hopefully, I now understand it better and will manage to write it down correctly!</p>
+
+<!--more-->
+
+
+<h2>Scope</h2>
+
+<p>First of all, if you look for a functions.php file in your wordpress installation: beware! There is also a file called functions.php in the wordpress core files in the wp-includes folder. We&#8217;re NOT talking about this one! We are talking about creating your own functions.php file in your <em>theme folder</em>. So don&#8217;t go edit the core one (one should NEVER edit the core files anyways) and instead work on your own, clean and empty version located in your theme directory.</p>
+
+<p>Now, about scope: the functions.php file in your theme is included from the following flow:</p>
+
+<ul>
+<li>a request arrives on your web server and process the index.php file.</li>
+<li>this includes wp-blog-header.php</li>
+<li>in turn this one includes wp-load.php</li>
+<li>that file eventually loads wp-config.php (you should know that file!)</li>
+<li>this config file then includes wp-settings.php</li>
+<li>wp-settings.php, after doing a whole load of stuff, includes your theme&#8217;s functions.php file (at last!)</li>
+</ul>
+
+
+<p>Because all of these includes happen in the files directly, using php&#8217;s include() function, and not in nested calls, they all inherit the global scope, and so does your functions.php file, but it&#8217;s not really important as we&#8217;ll see later on. What is important however, is the time in the whole page load process when the functions.php file is loaded: it happens before (read well: BEFORE) the wp-init() call is placed, which will then execute all actions, hooks and eventually render the requested page. If you&#8217;re interested in more details about what happens in this phases, more details are (and will be available in the near future apparently) on a post just written (funny enough, only a few days ago!), on <a title="What wordpress does before init" href="http://wordpressinternals.com/2011/08/what-wordpress-does-before-init/" target="_blank">wordpressinternals.com</a></p>
+
+<p>At this point, before the theme is loaded and right before the functions.php file of your theme is loaded, you have access to some global functions like is_admin(), and more importantly, wp_deregister_script(), wp_register_script() and wp_enqueue_script().</p>
+
+<p>That&#8217;s where it gets interesting, these functions are available to use, but if not carefully wrapped in hooks or actions, they will not return the inteded results. That&#8217;s what I was doing wrong, and that&#8217;s what prompted me to do this write up.</p>
+
+<h2>What was I doing wrong?</h2>
+
+<p>Basically, I was coding my theme the wrong way by not wrapping these tests in a hook or action, well before the WP init was called, as described on a <a title="Doing it wrong" href="http://core.trac.wordpress.org/ticket/11526#comment:14" target="_blank">wordpress development track ticket</a>. Like many theme developers, I guess, I started to write my new theme by using an existing one, and modified the functions.php file. Along the way I found great resources like <a title="digwp's functions.php template" href="http://digwp.com/2010/03/wordpress-functions-php-template-custom-functions/" target="_blank">digwp&#8217;s functions.php template</a>. Initially happy enough to have something working, while blissfully ignorant about its internals, I started to get a strange behaviour when I wanted to include scripts only on some specific pages of my theme.</p>
+
+<p>At the top of my <em>functions.php</em>, I had left the template file function calls to enqueue the scripts:</p>
+
+<pre class="brush: php; title: ; notranslate" title="">wp_deregister_script('jquery');
+wp_register_script('jquery', (get_bloginfo('stylesheet_directory')."/js/jquery-1.4.2.min.js"));
+wp_enqueue_script('jquery');
+</pre>
+
+
+<p>Lets say I want to add a script only on the home page. I&#8217;ve got a custom home page for my theme, so I&#8217;m using is_front_page() to detect it. I therefore added:</p>
+
+<pre class="brush: php; title: ; notranslate" title="">if( is_front_page()) {
+    wp_register_script('home_script', (get_bloginfo('stylesheet_directory')."/js/home.js"));
+    wp_enqueue_script('home_script');
+}
+</pre>
+
+
+<p>I also have custom templates like a &#8220;alternatepage.php&#8221; template file, so to detect it, I used the is_page_template() function:</p>
+
+<pre class="brush: php; title: ; notranslate" title="">if( is_page_template('alternatepage.php')) {
+    wp_register_script('alternatepage_script', (get_bloginfo('stylesheet_directory')."/js/alternatepage.js"));
+    wp_enqueue_script('alternatepage_script');
+}
+</pre>
+
+
+<p>Simple enough eh? Errrrr&#8230;. no!</p>
+
+<p>Access any of these pages and the required scripts will not get loaded.</p>
+
+<h2>Why does this not work?</h2>
+
+<p>The answer is fairly simple, providing you know the existence of the WP and WP_Query objects, and if you followed until here (and understood where I was going with the inclusion of php scripts).</p>
+
+<p>At the point where the functions.php file is loaded, when the is_front_page and is_page_template functions are called (Remember? When you include a php script it gets evaluated as part of the include process!), <em>no query has been made yet, therefore both functions will return false</em>!</p>
+
+<p>So how can I include only the scripts I require on the pages I want? <a title="Wordpress actions" href="http://codex.wordpress.org/Plugin_API#Actions" target="_blank">Actions</a> to the rescue!!</p>
+
+<h2>Which action do I need</h2>
+
+<p>Trawling through the <a title="Action reference" href="http://codex.wordpress.org/Plugin_API/Action_Reference" target="_blank">actions list</a>, there is one obvious action that should jump before your eyes: wp_enqueue_scripts. It&#8217;s executed right after the wp_head one, and is intended to allow theme developers to hook onto the moment in the page load where the platform enqueues its own scripts, adding theme specific ones.</p>
+
+<p>All I had to do was to wrap my calls to change the enqueued script files into a function tied to this hook:</p>
+
+<pre class="brush: php; title: ; notranslate" title="">function register_scripts() {
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', (get_bloginfo('stylesheet_directory')."/js/jquery-1.4.2.min.js"));
+    wp_enqueue_script('jquery');
+
+    if( is_front_page()) {
+        wp_register_script('home_script', (get_bloginfo('stylesheet_directory')."/js/home.js"));
+        wp_enqueue_script('home_script');
+    }
+
+    if( is_page_template('alternatepage.php')) {
+        wp_register_script('alternatepage_script', (get_bloginfo('stylesheet_directory')."/js/alternatepage.js"));
+        wp_enqueue_script('alternatepage_script');
+    }
+}
+add_action( 'wp_enqueue_scripts', 'register_scripts' );
+</pre>
+
+
+<p>All is fine now and the correct scripts are loaded on the right pages, but gosh it took some time to drill down the core of wordpress to understand what was going on!</p>
+
+<h2>My advice?</h2>
+
+<p>Only use hooks in your functions.php unless you have a very good reason not to!</p>
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/recruiters-scammers" title="Recruiters = Scammers?">previous </a>
+
+    <a class="button next" href="/cloud-nine-media" title="Latest project: Cloud Nine Media"> next</a>
+    </div>
+
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=WordPress wp_enque_scripts in functions.php">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2019</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-8194968-1', 'ekynoxe.com');ga('send', 'pageview');</script>
+    </body>
+</html>

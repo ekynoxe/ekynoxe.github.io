@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://www.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Extending contact form 7 - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+
+<ul>
+    <li class="home"><a title="home" class="selected" href="/">HOME</a></li>
+</ul>
+
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2010-09-06">September 06, 2010</time>
+                <h1>Extending contact form 7</h1>
+            </header>
+
+            <p>My latest client requested a &#8220;careers&#8221; section on his website, with the possibility to apply to a particular job offer directly from the description page. A form should be displayed on this page, that simply sends an email to the company&#8217;s careers department.</p>
+
+<p>As I developed the website using WordPress and a custom theme, I dug in the excellent <a href="http://wordpress.org/extend/plugins/contact-form-7/">contact form 7</a> plugin and created easily my custom forms.<!--more--></p>
+
+<p class="attachement"><img src="http://cdn.ekynoxe.com/content/2010-09-06-extending-contact-form-7/cf7-hpt.png" alt="contact form 7 extra option" /></p>
+
+
+<p>An obvious requirement: if the careers department receives an email sent from a form on the website, it should contain the job title or reference.
+However, there is nothing in contact form 7 that allows you to include out of the box such a reference that could be a post custom field or the title of the page.</p>
+
+<p>So I created my own contact form 7 custom input that adds a hidden input field containing the page title &#8211; which in my case contains the job description on a position page.</p>
+
+<p>Once you have added the required code, you should see the directly in the generator drop down menu when creating a form, and the syntax to use in your form is as simple as the other tags used by contact form 7:</p>
+
+<pre>[pagetitle field_name]</pre>
+
+
+<p>To add support for a hidden page title, simply add a file named <em>pagetitle.php</em> in the contact form 7 <em>modules</em> directory:</p>
+
+<h2>contact-form-7 >modules > pagetitle.php</h2>
+
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+/**
+** A base module for [hidden page title]
+**/
+
+// Shortcode handler
+
+wpcf7_add_shortcode( 'pagetitle', 'wpcf7_pagetitle_shortcode_handler', true );
+
+function wpcf7_pagetitle_shortcode_handler( $tag ) {
+    if ( ! is_array( $tag ) )
+        return '';
+
+    $name = $tag['name'];
+
+    $options = (array) $tag['options'];
+    $values = (array) $tag['values'];
+
+    $atts = '';
+    $id_att = '';
+
+    $class_att .= ' wpcf7-pagetitle';
+
+    foreach ( $options as $option ) {
+        if ( preg_match( '%^id:([-0-9a-zA-Z_]+)$%', $option, $matches ) ) {
+            $id_att = $matches[1];
+        }
+    }
+
+    if ( $id_att )
+        $atts .= ' id="' . trim( $id_att ) . '"';
+
+    global $wp_query;
+    $thePostTitle = $wp_query-&gt;post-&gt;post_title;
+
+    $value = $thePostTitle;
+
+    $html = '&lt;input name="'.$name.'" type="hidden" value="' . esc_attr( $value ) . '"' . $atts . ' /&gt;';
+
+    return $html;
+}
+
+// Tag generator
+
+add_action( 'admin_init', 'wpcf7_add_tag_generator_pagetitle', 50 );
+
+function wpcf7_add_tag_generator_pagetitle() {
+    wpcf7_add_tag_generator( 'pagetitle', __( 'Hidden page title', 'wpcf7' ),
+        'wpcf7-tg-pane-pagetitle', 'wpcf7_tg_pane_pagetitle' );
+}
+
+function wpcf7_tg_pane_pagetitle( &amp;$contact_form ) {
+? &gt;
+&lt;div id="wpcf7-tg-pane-pagetitle" class="hidden"&gt;
+&lt;form action=""&gt;
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;&lt;?php echo esc_html( __( 'Name', 'wpcf7' ) ); ?&gt;&lt;br /&gt;&lt;input type="text" name="name" class="tg-name oneline" /&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;id&lt;/code&gt; (&lt;?php echo esc_html( __( 'optional', 'wpcf7' ) ); ?&gt;)&lt;br /&gt;
+&lt;input type="text" name="id" class="idvalue oneline option" /&gt;&lt;/td&gt;
+
+&lt;td&gt;&lt;code&gt;class&lt;/code&gt; (&lt;?php echo esc_html( __( 'optional', 'wpcf7' ) ); ?&gt;)&lt;br /&gt;
+&lt;input type="text" name="class" class="classvalue oneline option" /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+&lt;div class="tg-tag"&gt;&lt;?php echo esc_html( __( "Copy this code and paste it into the form left.", 'wpcf7' ) ); ?&gt;&lt;br /&gt;&lt;input type="text" name="pagetitle" class="tag" readonly="readonly" onfocus="this.select()" /&gt;&lt;/div&gt;
+
+&lt;div class="tg-mail-tag"&gt;&lt;?php echo esc_html( __( "And, put this code into the File Attachments field below.", 'wpcf7' ) ); ?&gt;&lt;br /&gt;&lt;span class="arrow"&gt;&#11015;&lt;/span&gt;&nbsp;&lt;input type="text" class="mail-tag" readonly="readonly" onfocus="this.select()" /&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+&lt;?php
+}
+
+?&gt;
+</pre>
+
+
+<p>Enjoy!</p>
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/what-really-motivates-us" title="What really motivates us">previous </a>
+
+    <a class="button next" href="/create-a-deep-space-background-in-photoshop" title="Create a deep space background in photoshop"> next</a>
+    </div>
+
+    
+    <section class="comments">
+        <h2>comments</h2>
+        <ul>
+
+
+    <li>
+        <h3>
+    
+        <a href="http://blog.ivandemarino.me" title="Detronizator">Detronizator</a>
+    
+        <small>Sat, 11 Sep 2010 - 21:52</small></h3>
+        <p>OT: You do program Ruby and PHP. What's wrong with Python then? ;)</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Sun, 12 Sep 2010 - 13:59</small></h3>
+        <p>@Detronizator: Did I ever say anything about python being wrong? =D</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        Dan
+    
+        <small>Sun, 31 Oct 2010 - 11:06</small></h3>
+        <p>Hi
+I tried using this addon but it didn't work
+I added this code in the form area:
+[pagetitle field_name]
+
+and this code in the message area:
+[field_name]
+
+Any ideas what am I doing wrong?
+
+Thanks,
+Dan</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Sun, 31 Oct 2010 - 11:12</small></h3>
+        <p>Dan, the code you wrote and the places you put them seem correct.
+Did you add the code above in a pagetitle.php file in the contact-form-7 plugin modules directory as explained in the post above?
+
+If you did, try deactivating the plugin and reactivating it again.</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        Dan
+    
+        <small>Sun, 31 Oct 2010 - 11:19</small></h3>
+        <p>WOW!
+what a speedy reply.
+I reactivated the plugin as you said and now it works
+
+Thanks alot
+
+Dan</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Sun, 31 Oct 2010 - 11:23</small></h3>
+        <p>No probs, glad it works for you!</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        Aure
+    
+        <small>Mon, 01 Aug 2011 - 11:23</small></h3>
+        <p>Hi, good job m8. It was fine until I upgraded my CF7 plugin to 2.4.6 version. Now "Hidden page title" gone from dropdown menu :\</p>
+
+        
+            <ul>
+
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Thu, 18 Aug 2011 - 11:11</small></h3>
+        <p>Hi Aure,
+The problem you have is that I haven't submitted my change to the official plugin, so when you updated CF7, the change you have done simply disappeared.
+I'll try to contact the plugin author see if this can be integrated!
+Until then you will have to apply the change again I'm afraid.</p>
+
+        
+        
+
+    </li>
+
+</ul>
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Fri, 19 Aug 2011 - 09:58</small></h3>
+        <p>Aure, the author of the plugin pointed me towards this
+<a href='http://wordpress.org/extend/plugins/contact-form-7-modules/'>http://wordpress.org/extend/plugins/contact-form-7-modules/</a>
+
+I haven't tried it yet, but it certainly looks on paper to do what I needed when I extended CF7 in the first place!
+
+You might want to give it a go!</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        Miriam de Paula
+    
+        <small>Wed, 01 Feb 2012 - 21:47</small></h3>
+        <p>Hi ...
+
+I'm having the same problem as Dan:
+<a href='http://blog.ekynoxe.com/2010/09/06/extending-contact-form-7/#div-comment-762'>http://blog.ekynoxe.com/2010/09/06/extending-contact-form-7/#div-comment-762</a>
+
+Please, somebody help me?
+The extra field data are not sent in the mail .... =(</p>
+
+        
+            <ul>
+
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Wed, 01 Feb 2012 - 22:02</small></h3>
+        <p>Hi Miriam, which version of WPCF7 are you using? It seems there is support for a hidden field now. If you are still using an older version and try to implement the change documented above, have you uninstalled and re-installed the plugin like Dan did? It solved his problem apparently.</p>
+
+        
+        
+
+    </li>
+
+</ul>
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        Miriam de Paula
+    
+        <small>Wed, 01 Feb 2012 - 22:48</small></h3>
+        <p>Hi Matt...
+
+Thanks for responding.
+I created a  field that lists posts from custom post type. It is working. But I can not send the selected data in the email.
+
+What I did wrong?</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        Miriam de Paula
+    
+        <small>Wed, 01 Feb 2012 - 22:56</small></h3>
+        <p>Hi Matt.
+
+Very Thank you!
+
+I looked at the plugin's version, and there was an update (3.1). After upgrading, I got to the extra field work!
+
+Thank you! Thank you!
+
+=)</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Thu, 02 Feb 2012 - 07:08</small></h3>
+        <p>That's brilliant!! Glad you sorted out.
+Al the best!</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://www.beyazdavetiye.com" title="davetiye">davetiye</a>
+    
+        <small>Sat, 16 Mar 2013 - 08:05</small></h3>
+        <p>i want to put title in contact form but i couldnt. i also searching this problem on google and i find this page.
+thank you a lot i solve the problem.</p>
+
+        
+        
+
+    </li>
+
+</ul>
+    </section>
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=Extending contact form 7">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2019</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-8194968-1', 'ekynoxe.com');ga('send', 'pageview');</script>
+    </body>
+</html>

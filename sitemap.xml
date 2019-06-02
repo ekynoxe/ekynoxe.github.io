@@ -145,31 +145,29 @@
     </url>
 
     <url>
-        <loc>http://www.ekynoxe.com/404.html</loc>
+        <loc>http://www.ekynoxe.com/404</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/500.html</loc>
+        <loc>http://www.ekynoxe.com/500</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/archive/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/news/</loc>
-    </url><url>
-        <loc>http://www.ekynoxe.com/rss.xml</loc>
-    </url><url>
         <loc>http://www.ekynoxe.com/work/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/work project/</loc>
+        <loc>http://www.ekynoxe.com/news/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/zend/</loc>
+        <loc>http://www.ekynoxe.com/categories/work%20project/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/apache/</loc>
+        <loc>http://www.ekynoxe.com/categories/Zend/</loc>
+    </url><url>
+        <loc>http://www.ekynoxe.com/categories/Apache/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/design/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/mobile/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/ux/</loc>
+        <loc>http://www.ekynoxe.com/categories/UX/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/conferences/</loc>
     </url><url>
@@ -177,9 +175,9 @@
     </url><url>
         <loc>http://www.ekynoxe.com/categories/ruby/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/css/</loc>
+        <loc>http://www.ekynoxe.com/categories/CSS/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/orange/</loc>
+        <loc>http://www.ekynoxe.com/categories/Orange/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/git/</loc>
     </url><url>
@@ -191,7 +189,7 @@
     </url><url>
         <loc>http://www.ekynoxe.com/categories/photoshop/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/betfair/</loc>
+        <loc>http://www.ekynoxe.com/categories/Betfair/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/tools/</loc>
     </url><url>
@@ -213,13 +211,15 @@
     </url><url>
         <loc>http://www.ekynoxe.com/categories/games/</loc>
     </url><url>
-        <loc>http://www.ekynoxe.com/categories/solex/</loc>
+        <loc>http://www.ekynoxe.com/categories/Solex/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/identity/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/development/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/jekyll/</loc>
+    </url><url>
+        <loc>http://www.ekynoxe.com/categories/Jekyll/</loc>
     </url><url>
         <loc>http://www.ekynoxe.com/categories/brand/</loc>
     </url>

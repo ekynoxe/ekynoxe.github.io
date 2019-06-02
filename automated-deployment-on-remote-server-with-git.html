@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://www.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Automated deployment on remote server with git - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+
+<ul>
+    <li class="home"><a title="home" class="selected" href="/">HOME</a></li>
+</ul>
+
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2011-10-22">October 22, 2011</time>
+                <h1>Automated deployment on remote server with git</h1>
+            </header>
+
+            <p>Some time back, I wanted to setup my server so I could push code to my repositories, and have it automatically deployed to a website root directory after doing a git push from my local machine.
+I can&#8217;t remember where I found the instructions so I can&#8217;t give credit to whom I got it from, but here&#8217;s how I did it.</p>
+
+<p>This is followed by a tutorial on <a href="/git-post-receive-for-multiple-remote-branches-and-work-trees/" title="Git post-receive for multiple remote branches and work-trees">how to extend this setup to multiple branches and work-trees</a> for &#8220;live&#8221; and &#8220;development&#8221; versions of a website.</p>
+
+<!--more-->
+
+
+<p>I use this method for small personal projects where I really only need one branch to be automatically deployed. I will assume you already have a local git repository (</p>
+
+<p><a title="Hosting Git repositories, The Easy (and Secure) Way" href="scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way" target="_blank">Head here</a> for instructions how to, this is still somewhat valid!) with some code in it under a branch called &#8216;master&#8217;, and that you will push code to a remote server holding both your repository and your web server.</p>
+
+<h2>Create the remote repository (basic git setup)</h2>
+
+<h3>On server:</h3>
+
+<pre><code>mkdir /path/to/repo/project.git
+cd /path/to/repo/project.git
+git init --bare
+</code></pre>
+
+<h3>On local machine:</h3>
+
+<pre><code>cd /path/to/mycode
+git init
+git remote add origin git@yourserver:project.git
+</code></pre>
+
+<p>At this point (providing you have setup git on your server correctly, which I&#8217;m not going to cover here! This <a title="Hosting Git repositories, The Easy (and Secure) Way" href="http://scie.nti.st/2007/11/14/hosting-git-repositories-the-easy-and-secure-way" target="_blank">how-to</a> is still valid) you should be able to simply push your code to your server with the usual command</p>
+
+<pre><code>git push origin master
+</code></pre>
+
+<h2>Adding single branch automatic deployment</h2>
+
+<p>First, you&#8217;ll need a place to deploy your code to, that&#8217;s call the detached work tree from Git&#8217;s point of view because it&#8217;s a copy of the code without the history or references. I have both my repositories and webserver on the same machine so these instructions are for this configuration only. This detached work tree needs to be under your webserver&#8217;s root directory if you&#8217;re deploying a web site, but you could deploy that whatever place you want.</p>
+
+<h3>On server:</h3>
+
+<p>Create the work-tree directory and make make sure the git user (or the one you use for git repositories) has permissions to write to this directory:</p>
+
+<pre><code>mkdir /path/under/root/dir/project
+chown git:git /path/under/root/dir/project
+</code></pre>
+
+<p>Then, you need to add a bit of configuration to your repository (created above):</p>
+
+<pre><code>cd /path/to/repo/project.git
+git config core.worktree /path/under/root/dir/project
+git config core.bare false
+git config receive.denycurrentbranch ignore
+</code></pre>
+
+<p>Finally, all you have to do is create and make executable a &#8220;post-receive&#8221; hook in your repository&#8217;s hooks folder:</p>
+
+<pre><code>cd /path/to/repo/project.git/hooks/
+touch post-receive
+chmod +x post-receive
+vi post-receive
+</code></pre>
+
+<p>And paste this code into this file:</p>
+
+<pre><code>#!/bin/sh git checkout -f
+</code></pre>
+
+<p>And voilà! Next time you push new changes from your local machine to the main server, the default (master) branch will be automatically checked out from your repository into the detached working tree.</p>
+
+<p><em><strong>EDIT:</strong> Following Luca&#8217;s comments below, it&#8217;s worth noting that if you have no local changes, nothing will get pushed, and the hook will not be fired! So when you do your next push (after all the setup), remember to edit a file to somewhat &#8220;force&#8221; a push. Then your content will be checked out by the hook. No update, no deployment</em></p>
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/how-to-be-a-successfull-business-make-every-customer-feel-special" title="How to be a successfull business? Make *every* customer feel special&#8230;">previous </a>
+
+    <a class="button next" href="/git-post-receive-for-multiple-remote-branches-and-work-trees" title="Git post-receive for multiple remote branches and work-trees"> next</a>
+    </div>
+
+    
+    <section class="comments">
+        <h2>comments</h2>
+        <ul>
+
+
+    <li>
+        <h3>
+    
+        luca
+    
+        <small>Mon, 31 Oct 2011 - 21:53</small></h3>
+        <p>thanks!
+
+I set up this environment in my dev server and works like a charm.
+You might want to add an extra step:
+
+I had to checkout your branch (in this case master) before being able to do
+
+git checkout -f
+
+which is in the post-receive hook.</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Mon, 31 Oct 2011 - 21:54</small></h3>
+        <p>What do you mean "checkout your branch"? Where was this? On the server, your local machine?</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        luca
+    
+        <small>Mon, 31 Oct 2011 - 21:56</small></h3>
+        <p>sorry I meant my branch :)
+
+when you do (in your tutorial)
+
+git push origin master
+
+
+in order for the post-receive hook to start working I had to run first
+
+git checkout master
+
+then it worked.
+
+Without doing this step first, it looks the repo is not set to any branch and a call to git checkout -f will result in a:
+
+ fatal: You are on a branch yet to be born</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Mon, 31 Oct 2011 - 22:06</small></h3>
+        <p>Ah, it might be because you tried to push without any content changes.
+Doing a git push origin master with no content will not push anything, and the hook will not get fired</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Tue, 01 Nov 2011 - 23:45</small></h3>
+        <p>Actually, it might be because you're not pushing anything to a branch named 'master' and git fails to recognise that... I think I need to check if git implies that the push has to be on a branch named 'master'</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://www.chierotti.net" title="Chieroz">Chieroz</a>
+    
+        <small>Tue, 13 Mar 2012 - 13:41</small></h3>
+        <p>Thank you, great advice.
+
+Just a note: I work in a Mac environment and I had to change the order of the commands on the server:
+first -&gt; git config core.bare false
+then -&gt; git config core.worktree /path/to/website/folder
+
+ciao</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Tue, 13 Mar 2012 - 14:01</small></h3>
+        <p>Interesting Carlo, why do you think that is?
+Does setting the "bare" configuration actually initialises the repo as bare at the same time or something like this?</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        gustavo
+    
+        <small>Thu, 12 Jul 2012 - 17:44</small></h3>
+        <p>After deploy the files are inaccessible with browser, because now the user git is the owner, what can i do for change this? I want they are accessibles to apache.</p>
+
+        
+            <ul>
+
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Thu, 12 Jul 2012 - 18:04</small></h3>
+        <p>Hola Gustavo!
+All you need to do is either make git a member of your apache group.
+You could add a change of ownership in the same "post-receive" hook with chown apache:apache (assuming these are your user/group names for apache), but if git isn't in the apache group, you won't be able to deploy with git next time because the file isn't owned by git anymore.
+
+The git hooks are (in this example) standard bash scripts, so you can use all your usual bash/unix knowledge to manage permissions.</p>
+
+        
+        
+
+    </li>
+
+</ul>
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        gustavo
+    
+        <small>Thu, 12 Jul 2012 - 18:49</small></h3>
+        <p>Thanks a lot!
+
+I just only did:
+
+
+</p><pre><code>chown -R git:www-data /var/www/gitdeploy</code></pre><p></p>
+
+        
+            <ul>
+
+
+    <li>
+        <h3>
+    
+        Matt
+    
+        <small>Thu, 12 Jul 2012 - 19:05</small></h3>
+        <p>Spot on! Well done.</p>
+
+        
+        
+
+    </li>
+
+</ul>
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        aaki
+    
+        <small>Thu, 26 Jul 2012 - 13:06</small></h3>
+        <p>You don't need to git config core.*, see <a href='http://toroid.org/ams/git-website-howto'>http://toroid.org/ams/git-website-howto</a>
+Seems to be easier, a bit.</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        <a href="http://ekynoxe.com" title="Matt">Matt</a>
+    
+        <small>Wed, 22 Aug 2012 - 10:37</small></h3>
+        <p>Aaaki, if this is your first repository, then you might. I've taken the point of view that you're on a fresh install and having one repository.
+Your link seems however a good other approach whereby setting the GIT_WORK_TREE environment variable can be done on a per project basis.
+
+Something to consider indeed!</p>
+
+        
+        
+
+    </li>
+
+    <li>
+        <h3>
+    
+        Guillaume Lang
+    
+        <small>Fri, 21 Mar 2014 - 15:38</small></h3>
+        <p>Hello, i just wont to say big thanks to you for this tip, thank you very much, and sorry for my bad english, I'm french!</p>
+
+        
+        
+
+    </li>
+
+</ul>
+    </section>
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=Automated deployment on remote server with git">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2019</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-8194968-1', 'ekynoxe.com');ga('send', 'pageview');</script>
+    </body>
+</html>

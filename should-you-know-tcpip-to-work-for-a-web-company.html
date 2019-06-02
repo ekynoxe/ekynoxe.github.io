@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://www.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Should you know TCP/IP to work for a web company? - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+
+<ul>
+    <li class="home"><a title="home" class="selected" href="/">HOME</a></li>
+</ul>
+
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2012-09-25">September 25, 2012</time>
+                <h1>Should you know TCP/IP to work for a web company?</h1>
+            </header>
+
+            <p>An interesting discussion (argument?) popped in my tweets yesterday in the form of TCP/IP knowledge depth to be able to work at a web company.</p>
+
+<p class="attachement"><span><img src="http://cdn.ekynoxe.com/content/2012-09-25-should-you-know-tcpip-to-work-for-a-web-company/tweetshot.jpg" alt="The tweet that prompted it all"/></span></p>
+
+
+<p>That quickly prompted quite a few replies from developers and techs leads of different levels and knowledge, including myself, but none of us asked the question: &#8220;for which role?&#8221;</p>
+
+<!--more-->
+
+
+<p>There are a lot of different roles at a web company, and if we exclude the obvious non techies ones (I doubt the receptionist gives a damn about MTU and error control), we can still argue about the depth of network knowledge required to occupy a technical role.
+Let&#8217;s be clear here: we&#8217;re <strong>not</strong> talking about connecting your laptop to your corporate wifi network, but about network protocols and how they work.</p>
+
+<p><strong>The pure front-end developer: </strong> I&#8217;d argue you only need some very small basics, if any, about network protocols to do an awesome job without any problem. I hope you know what an IP address is, and that&#8217;s possibly the only thing you&#8217;ll need. If you don&#8217;t, dig it up, but don&#8217;t learn the whole CCNA syllabus. No need. Knowing HTTP, on the other hand, is not an option these days, even for &#8220;pure front-enders&#8221; who&#8217;ll most likely have to do something with asynchronous javaScript calls at some point or another.</p>
+
+<p><strong>The all rounder</strong>: If, like me, you&#8217;re one of those, doing some front end and backend code, you&#8217;ll probably want to know a bit more about what rules data transfers across networks. Having a little knowledge about network protocols, what they generally do and how to ping/trace stuff is a good thing. But I am really not convinced that knowing the inner workings TCP/IP should be a requirement to land you a job. Hands up all rounders who have had to dig in TCP retransmission timeouts or the size of IP datagrams because some packets were being dropped on &#8220;the line&#8221;? Yeah&#8230; I thought so. Probably not many, and the ones who raised their hands either do a networks engineer&#8217;s job, or, like me, did some network studies before falling into development.</p>
+
+<p><strong>The back-ender:</strong> It&#8217;s probably a very good asset to have, especially if you work at a web company dealing with large volumes of users, requests, page loads and transactions. Knowing it will probably help a lot in optimisation of data transfers an server communications. I&#8217;d argue here that it is a requirement for you to know where things happen on the network stack. You won&#8217;t need it every day in your job, but you&#8217;ll have an extra weapon in your arsenal in case things get nasty in those lower layers. Having said that, if you don&#8217;t work on networks systems, I&#8217;m pretty sure you can still do an excellent job without the complete knowledge of how IP re-assembles packets or how TCP works out how to retransmis the ones gone astray&#8230;</p>
+
+<p>Now if you&#8217;re interviewing for a network or systems engineer role, then you should not only know what TCP/IP is, but know its inner workings and its quirks. You should know how to trace errors in packets and be able to identify why some retransmission occurs on the networks you&#8217;ll be managing. At this level, basics aren&#8217;t enough anymore, but this is valid in any IT networks department, regardless of the company.</p>
+
+<p>As with everything, it&#8217;s all a matter of perspective (and remember I&#8217;m more an all-rounder with a strong preference on front-end development), but I&#8217;d argue you don&#8217;t need a very deep understanding of the inner workings TCP/IP and how it works to &#8220;work at a web company&#8221;.</p>
+
+<p>What&#8217;s <strong>your</strong> view?</p>
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/the-day-one-image-brought-my-server-down" title="The day one image brought my server down">previous </a>
+
+    <a class="button next" href="/ideas-for-twickenham-city-center" title="Ideas for Twickenham city center"> next</a>
+    </div>
+
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=Should you know TCP/IP to work for a web company?">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2019</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-8194968-1', 'ekynoxe.com');ga('send', 'pageview');</script>
+    </body>
+</html>

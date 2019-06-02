@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="description" content="Mathieu Davy's one man web studio">
+        <meta name="author" content="Mathieu Davy">
+        <link rel="alternate" type="application/rss+xml" title="Ekynoxe - Web development in London" href="http://www.ekynoxe.com/rss.xml">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Migrating comments and the quest for a lightweight solution - Ekynoxe - Web development in London</title>
+        <link href="/assets/css/global.css" rel="stylesheet" type="text/css">
+        
+
+        <link rel="shortcut icon" href="/assets/img/style/favicon.ico">
+
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/style/apple-touch-icon-152x152-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/style/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/img/style/apple-touch-icon-120x120-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/style/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/img/style/apple-touch-icon-76x76-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/style/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/assets/img/style/apple-touch-icon-precomposed.png">
+
+        <!--[if IE 8 ]>
+            <link href="/assets/css/ie8.css" rel="stylesheet" type="text/css">
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+            <script>
+                document.createElement('header');
+                document.createElement('nav');
+                document.createElement('section');
+                document.createElement('article');
+                document.createElement('aside');
+                document.createElement('footer');
+                document.createElement('time');
+            </script>
+        <![endif]-->
+
+        
+
+    </head>
+    <!--[if lt IE 7 ]>
+    <body class="ie ie6">
+    <![endif]-->
+    <!--[if IE 7 ]>
+    <body class="ie ie7">
+    <![endif]-->
+    <!--[if IE 8 ]>
+    <body class="ie ie8">
+    <![endif]-->
+    <!--[if IE 9 ]>
+    <body class="ie ie9">
+    <![endif]-->
+    <!--[if gt IE 9]>
+    <body class="ie">
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <body>
+    <!--<![endif]-->
+        <header class="main">
+    <nav role="navigation">
+        <div class="content">
+            <div class="inner">
+                
+
+
+
+
+
+
+<ul>
+    <li class="home"><a title="home" class="selected" href="/">HOME</a></li>
+</ul>
+
+            </div>
+        </div>
+    </nav>
+    
+</header>
+
+
+<div id="page">
+    <div class="content">
+
+    <section>
+        <article>
+            <header>
+                <time datetime="2014-03-18">March 18, 2014</time>
+                <h1>Migrating comments and the quest for a lightweight solution</h1>
+            </header>
+
+            <p>When I <a href="/on-jekyll/">migrated to jekyll</a>, I also wanted to migrate all my comments. My site doesn&rsquo;t have that many of them, so I thought it should have been a doddle to do it, and I was initially firmly set on using <a href="http://disqus.com/">Disqus</a>. It seemed simple, the embedded code interface didn&rsquo;t look too bad within my new website&rsquo;s design, and I didn&rsquo;t care that much about the fact that it works only with javascript.</p>
+
+<p class="attachement"><span><img src="http://cdn.ekynoxe.com/content/2014-03-18-migrating-comments-and-the-quest-for-a-lightweight-solution/comment.png" alt="comments" /></span></p>
+
+
+
+
+<!--more-->
+
+
+<p>Exporting my comments from Wordpress was very easy through WXR export file, and uploading them to Disqus was equally easy in the first instance.</p>
+
+<p>However, I wasn&rsquo;t just moving my comments from Wordpress to Disqus under the same domain, but also changing said domain. And that&rsquo;s where the shine started to fade.</p>
+
+<p>There is a domain migration tool provided by Disqus, but no matter how much I tried to migrate comments to the new URLs, I couldn&rsquo;t make it work.
+Maybe I misunderstood something about the process, but the lack of feedback when creating a URL migration and the lack of documentation around the process is appalling at best.</p>
+
+<p>The basic Disqus interface is probably OK as long as you stay in the confines of the bog-standard pathway, but for anything else, I found it to be very confusing. Very poor instructions, complete lack of feedback, and zero other on-line resources. The experience wasn&rsquo;t great. I even tried to contact their &ldquo;customer support&rdquo; a few times, but there again I didn&rsquo;t receive even the acknowledgement that my request had been received. I still haven&rsquo;t received anything to this day.</p>
+
+<p>Over 5 days of experimentation, I tried to migrate the comments to domains on my local machine with a host file entry and on a real, live, website under a development domain of mine, just in case Disqus' back-end needed to verify that this domain worked somehow. I repeated the whole import / migration a few times, but nothing at all was indicating that I was going in the right direction.</p>
+
+<p>Not a speck of light on anything was visible. So I&rsquo;ve giving up on Disqus. If you&rsquo;re the standard user, you might be OK. If you have other needs: buzz off&hellip;</p>
+
+<p>I had a look at a few other systems like <a href="https://moot.it/">Moot.it</a>, <a href="http://web.livefyre.com/">Livefyre</a>, and some others, but they either are too complex and expensive for what I need, or have no obvious support to import anything.</p>
+
+<p>Given the waste of time, I have therefore pulled the plug entirely on using any existing third party commenting system at the moment. I think I&rsquo;ve even come around to refusing to give the data of my website to a third party at all anyway.</p>
+
+<p>In time, I&rsquo;ll create my very own commenting system, keeping ownership of my comments, and hopefully share that code with everyone for a self hosted solution that one can control entirely. It may be seen as reinventing the wheel, but I&rsquo;ll disagree. I won&rsquo;t create another Disqus, I&rsquo;ll create a solution for geeks who don&rsquo;t mind looking at a little bit of code, but mind a lot about where their content goes.</p>
+
+<p>The basic requirements are pretty simple:</p>
+
+<ul>
+<li>A secure API for sending/fetching comments. No need for the posting side of things to even work through an interface</li>
+<li>An administration interface to manage comments, edit, delete, spam them etc&hellip; (I don&rsquo;t see myself doing it all command line!)</li>
+<li>Comment reply notifications</li>
+<li>It must be always on: no &ldquo;Heroku 5 seconds spin up of death scenario&hellip;&rdquo;</li>
+<li>Configuration options per post/page to accept/block or enable/disable comments</li>
+<li>Spam detection will be a must, and probably the trickiest one. But since a self hosted WP installation does it, there must be a way to replicate this with an Akismet key.</li>
+</ul>
+
+
+<p>Things I don&rsquo;t need or care for</p>
+
+<ul>
+<li>Avatars</li>
+<li>Discussions. I want this solution to be just comments, and replies to comments. Other systems do discussions, and I&rsquo;ll happily leave it to them!</li>
+<li>Fancy mark-up. Everything will start by being stored as escaped HTML. Then it will be up to clients to use the correct parsers/highlighters. Whether they are JavaScript or ruby, I won&rsquo;t care.</li>
+</ul>
+
+
+<p>In the mean time, you can send me an email with your comments, and I&rsquo;ll add them to the statically hosted ones on this site.</p>
+
+        </article>
+    </section>
+
+    <div class="pagination">
+    <a class="button previous" href="/301-redirect-your-wordpress-website-to-jekyll" title="301 redirect your Wordpress website to Jekyll">previous </a>
+
+    <a class="button next" href="/get-your-brand-respected-distribute-vector-logos" title="Get your brand respected: distribute vector logos"> next</a>
+    </div>
+
+    
+        <p class="notice"><small>Comments are disabled temporarily until I find a suitable system, but you can still <a href="mailto:hello@ekynoxe.com?subject=Migrating comments and the quest for a lightweight solution">send a comment by email</a> and I'll add it to this post. Thanks!</small></p>
+</div>
+</div>
+
+<footer class="main">
+    <div class="overlay">
+        <div class="content">
+            <dl>
+                <dd class="twitter"><a title="Mathieu Davy on Twitter" href="http://twitter.com/ekynoxe">twitter</a></dd>
+                <dd class="linkedin"><a title="Mathieu Davy on Linked In" href="http://linkedin.com/in/mathieudavy">linkedin</a></dd>
+            </dl>
+            <small>ekynoxe - Mathieu Davy 2019</small>
+        </div>
+    </div>
+    <a id="scrollToTop" href="#top">top</a>
+</footer>
+
+        <script>
+
+        if (document.documentElement.clientWidth >= 768) {
+            var jQueryJs = document.createElement("script"),
+                mainJs = document.createElement("script"),
+                lightboxJs = document.createElement("script");
+
+            jQueryJs.type = "text/javascript";
+            jQueryJs.src = "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js";
+
+            mainJs.type = "text/javascript";
+            mainJs.src = "http://cdn.ekynoxe.com/assets/js/main.min.js";
+
+            lightboxJs.type = "text/javascript";
+            lightboxJs.src = "http://cdn.ekynoxe.com/assets/js/lightbox-2.6.min.js";
+
+            jQueryJs.onload = function () {
+                document.body.appendChild(mainJs);
+                $('head').append('<link rel="stylesheet" href="http://cdn.ekynoxe.com/assets/css/lightbox/lightbox.min.css" type="text/css" />');
+                document.body.appendChild(lightboxJs);
+            }
+
+            document.body.appendChild(jQueryJs);
+        }
+        </script>
+        <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-8194968-1', 'ekynoxe.com');ga('send', 'pageview');</script>
+    </body>
+</html>
